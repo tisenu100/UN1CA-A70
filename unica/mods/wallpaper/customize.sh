@@ -35,12 +35,5 @@ RESIZE_APK()
 }
 # ]
 
-cat "$SRC_DIR/unica/mods/wallpaper/e1q/wallpaper-res.apk.00" \
-    "$SRC_DIR/unica/mods/wallpaper/e1q/wallpaper-res.apk.01" \
-    "$SRC_DIR/unica/mods/wallpaper/e1q/wallpaper-res.apk.02" \
-    "$SRC_DIR/unica/mods/wallpaper/e1q/wallpaper-res.apk.03" \
-    "$SRC_DIR/unica/mods/wallpaper/e1q/wallpaper-res.apk.04" \
-    "$SRC_DIR/unica/mods/wallpaper/e1q/wallpaper-res.apk.05" \
-    > "$WORK_DIR/system/system/priv-app/wallpaper-res/wallpaper-res.apk"
 
 RESIZE_APK
