@@ -18,11 +18,6 @@ DOWNLOAD_APK()
 }
 # ]
 
-# Patched GoodLock Manager @corsicanu
-# https://github.com/corsicanu/goodlock_dump
-DOWNLOAD_APK "https://github.com/corsicanu/goodlock_dump/raw/main/GoodLock_patched.apk" \
-    "GoodLock/GoodLock.apk"
-
 # Samsung Internet Browser
 # https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser
 if [[ "$TARGET_CODENAME" != "a71" ]]; then
