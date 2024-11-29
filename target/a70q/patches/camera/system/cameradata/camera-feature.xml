@@ -41,6 +41,17 @@
     <local name="FRONT_CAMERA_RESOLUTION_1BY1_LARGE" value="3024x3024" />
     <local name="FRONT_CAMERA_RESOLUTION_FULL_RATIO" value="4032x1816" />
 
+    <!-- Capture resolution - SUPER -->
+    <local name="BACK_CAMERA_RESOLUTION_SUPER_RESOLUTION" value="6528x4896" />
+    <local name="FRONT_CAMERA_RESOLUTION_SUPER_RESOLUTION" value="6528x4896" />
+
+    <!-- Front camera sensor crop resolution -->
+    <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_4BY3_LARGE" value="3264x2448"/>
+    <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_4BY3_MEDIUM" value="3264x2448"/>
+    <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_16BY9_LARGE" value="3264x1836"/>
+    <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_1BY1_LARGE" value="2448x2448"/>
+    <local name="FRONT_CAMERA_SENSOR_CROP_RESOLUTION_FULL_RATIO" value="3264x1472"/>
+
     <!-- Recording resolution - BACK -->
     <local name="BACK_CAMERA_RECORDING_DEFAULT_RESOLUTION" value="1920x1080"/>
     <local name="BACK_CAMERA_RECORDING_MIN_RESOLUTION" value="640x480"/>

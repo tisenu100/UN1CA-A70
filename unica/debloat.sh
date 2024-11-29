@@ -43,6 +43,7 @@ system/priv-app/SsuService
 
 # .odex files
 SYSTEM_DEBLOAT+="
+system/app/AirGlance/oat
 system/app/AllShareAware/oat
 system/app/AllshareMediaShare/oat
 system/app/ApexService/oat
@@ -79,6 +80,7 @@ system/app/HiyaService/oat
 system/app/HMT/oat
 system/app/HoneyBoard/oat
 system/app/KidsHome_Installer/oat
+system/app/LiveDrawing/oat
 system/app/LiveTranscribe/oat
 system/app/MAPSAgent/oat
 system/app/MdecService/oat
@@ -129,6 +131,7 @@ system/app/TetheringAutomation/oat
 system/app/UnifiedWFC/oat
 system/app/UniversalMDMClient/oat
 system/app/USBSettings/oat
+system/app/Uwbtest/oat
 system/app/VisionIntelligence3.7/oat
 system/app/VoiceAccess/oat
 system/app/VTCameraSetting/oat
@@ -160,6 +163,8 @@ system/framework/boot.vdex
 system/framework/boot-voip-common.vdex
 system/priv-app/Accessibility/oat
 system/priv-app/AdaptSound_U2/oat
+system/priv-app/AirCommand/oat
+system/priv-app/AirReadingGlass/oat
 system/priv-app/AppsEdgePanel_v3.2/oat
 system/priv-app/AppUpdateCenter/oat
 system/priv-app/AREmojiEditor/oat
