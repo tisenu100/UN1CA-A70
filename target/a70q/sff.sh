@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# SEC Floating Feature configuration file for Galaxy A71 (a71)
+# SEC Floating Feature configuration file for Galaxy A70 (a70q)
 
 # Disable unsupported features
 SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_HEARING_AIDS=
