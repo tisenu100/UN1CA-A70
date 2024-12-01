@@ -1,3 +1,5 @@
+SKIPUNZIP=1
+
 # [
 ADD_TO_WORK_DIR()
 {
@@ -91,15 +93,6 @@ REMOVE_FROM_WORK_DIR()
 MODEL=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 1)
 REGION=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 2)
 
-sed -i 's/SRIB_HumanInsSeg_FP16_V008/SRIB_BanetLite_FP16_V400/g' "$WORK_DIR/configs/file_context-system"
-sed -i 's/SRIB_HumanInsSeg_FP16_V008/SRIB_BanetLite_FP16_V400/g' "$WORK_DIR/configs/fs_config-system"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/cameradata/portrait_data/SRIB_HumanInsSeg_FP16_V008.snf"
-
-if ! grep -q "Camera End" "$WORK_DIR/vendor/ueventd.rc"; then
-    echo "" >> "$WORK_DIR/vendor/ueventd.rc"
-    cat "$SRC_DIR/target/a70q/patches/camera/ueventd" >> "$WORK_DIR/vendor/ueventd.rc"
-fi
-
 BLOBS_LIST="
 system/lib/FrcMcWrapper.so
 system/lib/libFrucPSVTLib.so
@@ -107,6 +100,7 @@ system/lib/libSemanticMap_v1.camera.samsung.so
 system/lib/libSlowShutter-core.so
 system/lib/libaifrc.aidl.quram.so
 system/lib/libaifrcInterface.camera.samsung.so
+system/lib/libapex_motionphoto_utils_jni.media.samsung.so
 system/lib/libgpuss_wrapper.so
 system/lib/libmcaimegpu.samsung.so
 system/lib/vendor.samsung.hardware.frcmc-V1-ndk.so
@@ -147,11 +141,11 @@ system/lib64/libaiclearzoom_raw.arcsoft.so
 system/lib64/libaiclearzoomraw_wrapper_v1.camera.samsung.so
 system/lib64/libaifrc.aidl.quram.so
 system/lib64/libaifrcInterface.camera.samsung.so
+system/lib64/libapex_motionphoto_utils_jni.media.samsung.so
 system/lib64/libarcsoft_dualcam_portraitlighting.so
 system/lib64/libarcsoft_single_cam_glasses_seg.so
 system/lib64/libdualcam_refocus_image.so
 system/lib64/libdvs.camera.samsung.so
-system/lib64/libfacialrestoration.arcsoft.so
 system/lib64/libfrtracking_engine.arcsoft.so
 system/lib64/libgpuss_wrapper.so
 system/lib64/libhigh_dynamic_range_bokeh.so
@@ -173,20 +167,25 @@ done
 
 echo "Add stock camera libs"
 BLOBS_LIST="
-system/lib64/libFace_Landmark_Engine.camera.samsung.so
+system/etc/public.libraries-camera.samsung.txt
+system/lib/libSlowShutter_jni.media.samsung.so
+system/lib/libapex_jni.media.samsung.so
 system/lib64/libFaceRestoration.camera.samsung.so
+system/lib64/libFace_Landmark_Engine.camera.samsung.so
 system/lib64/libFacialStickerEngine.arcsoft.so
 system/lib64/libHpr_RecFace_dl_v1.0.camera.samsung.so
 system/lib64/libImageCropper.camera.samsung.so
 system/lib64/libImageTagger.camera.samsung.so
 system/lib64/libMyFilter.camera.samsung.so
 system/lib64/libPortraitDistortionCorrection.arcsoft.so
+system/lib64/libSlowShutter_jni.media.samsung.so
+system/lib64/libapex_jni.media.samsung.so
 system/lib64/libhigh_dynamic_range.arcsoft.so
 system/lib64/libhumantracking_util.camera.samsung.so
 system/lib64/libhumantracking.arcsoft.so
 system/lib64/liblow_light_hdr.arcsoft.so
 system/lib64/libsaiv_HprFace_cmh_support_jni.camera.samsung.so
-system/lib64/libsurfaceutil.camera.samsung.so
+system/lib64/libsamsung_videoengine_9_0.so
 system/lib64/libtensorflowLite.myfilter.camera.samsung.so
 system/lib64/libtensorflowlite_inference_api.myfilter.camera.samsung.so
 "
@@ -194,10 +193,14 @@ for blob in $BLOBS_LIST
 do
     ADD_TO_WORK_DIR "system" "$blob" 0 0 644 "u:object_r:system_lib_file:s0"
 done
+{
+    echo "libLttEngine.camera.samsung.so"
+    echo "libHIDTSnapJNI.camera.samsung.so"
+} >> "$WORK_DIR/system/system/etc/public.libraries-camera.samsung.txt"
 
 echo "Fix AI Photo Editor"
 cp -a --preserve=all \
-    "$SRC_DIR/target/a70q/patches/camera/system/cameradata/portrait_data/single_bokeh_feature.json" \
+    "$FW_DIR/${MODEL}_${REGION}/system/system/cameradata/portrait_data/single_bokeh_feature.json" \
     "$WORK_DIR/system/system/cameradata/portrait_data/unica_bokeh_feature.json"
 if ! grep -q "unica_bokeh_feature" "$WORK_DIR/configs/file_context-system"; then
     {
@@ -214,3 +217,6 @@ sed -i "s/MODEL_TYPE_INSTANCE_CAPTURE/MODEL_TYPE_OBJ_INSTANCE_CAPTURE/g" \
 sed -i \
     's/system\/cameradata\/portrait_data\/single_bokeh_feature.json/system\/cameradata\/portrait_data\/unica_bokeh_feature.json\x00/g' \
     "$WORK_DIR/system/system/lib64/libPortraitSolution.camera.samsung.so"
+
+echo "Fix MIDAS model detection"
+sed -i "s/ro.product.device/ro.product.vendor.device/g" "$WORK_DIR/vendor/etc/midas/midas_config.json"

@@ -47,7 +47,8 @@ sed -i "/# Removed by /d" "$WORK_DIR/product/etc/build.prop" \
 echo "Disable OEM unlock toggle"
 SET_PROP "ro.oem_unlock_supported" "0" "$WORK_DIR/vendor/default.prop"
 
-echo "Add display refresh rate props"
+echo "Enable adaptive FPS"
+SET_PROP "ro.surface_flinger.use_content_detection_for_refresh_rate" "true" "$WORK_DIR/vendor/default.prop"
 sed -i \
-    "/max_frame_buffer_acquired_buffers/a ro.surface_flinger.enable_frame_rate_override=false\nro.surface_flinger.use_content_detection_for_refresh_rate=false" \
+    "/use_content_detection/a ro.surface_flinger.set_idle_timer_ms=3000\nro.surface_flinger.set_touch_timer_ms=500\nro.surface_flinger.set_display_power_timer_ms=1000" \
     "$WORK_DIR/vendor/default.prop"

@@ -4,10 +4,8 @@
     <item type="dimen" name="config_screenBrightnessSettingDefaultFloat">0.5019608</item>
     <item type="dimen" name="config_screenBrightnessSettingMaximumFloat">1.0</item>
     <item type="dimen" name="config_screenBrightnessSettingMinimumFloat">0.0</item>
-    <dimen name="physical_power_button_center_screen_location_y">940.0px</dimen>
     <dimen name="rounded_corner_radius_bottom">181.0px</dimen>
     <dimen name="rounded_corner_radius_top">181.0px</dimen>
-    <dimen name="status_bar_camera_cutout_crop_size">60.0px</dimen>
-    <dimen name="status_bar_height_portrait">76.0px</dimen>
+    <dimen name="status_bar_height_portrait">68.0px</dimen>
     <dimen name="status_bar_indicator_corner_padding">80.0px</dimen>
 </resources>
