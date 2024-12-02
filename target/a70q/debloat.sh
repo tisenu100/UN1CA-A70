@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2024 BlackMesa123
+# Copyright (C) 2023 BlackMesa123
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# Debloat list for Galaxy A70 (a70q)
+# Debloat list for Galaxy A52 (a52q)
 # - Add entries inside the specific partition containing that file (<PARTITION>_DEBLOAT+="")
 # - DO NOT add the partition name at the start of any entry (eg. "/system/dpolicy_system")
 # - DO NOT add a slash at the start of any entry (eg. "/dpolicy_system")
@@ -52,6 +52,9 @@ system/priv-app/GameDriver-SM8550
 
 # Camera SDK
 SYSTEM_DEBLOAT+="
+system/app/ApexService
+system/bin/apexserver
+system/etc/init/apexserver.qcom.rc
 system/etc/default-permissions/default-permissions-com.samsung.android.globalpostprocmgr.xml
 system/etc/default-permissions/default-permissions-com.samsung.petservice.xml
 system/etc/default-permissions/default-permissions-com.samsung.videoscan.xml
@@ -59,40 +62,20 @@ system/etc/permissions/cameraservice.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.globalpostprocmgr.xml
 system/etc/permissions/privapp-permissions-com.samsung.petservice.xml
 system/etc/permissions/privapp-permissions-com.samsung.videoscan.xml
-system/etc/permissions/sec_camerax_impl.xml
-system/etc/permissions/sec_camerax_service.xml
-system/framework/sec_camerax_impl.jar
 system/framework/scamera_sep.jar
+system/lib64/libamex.so
+system/lib64/libppvdis_wrapper.so
 system/priv-app/GlobalPostProcMgr
 system/priv-app/PetService
 system/priv-app/SCameraSDKService
-system/priv-app/sec_camerax_service
 system/priv-app/VideoScan
-"
-
-# Gallery AI Semantic Search
-SYSTEM_DEBLOAT+="
-system/etc/default-permissions/default-permissions-com.samsung.mediasearch.xml
-system/etc/mediasearch
-system/etc/permissions/privapp-permissions-com.samsung.mediasearch.xml
-system/priv-app/MediaSearch
 "
 
 # Apps debloat
 SYSTEM_DEBLOAT+="
-system/etc/default-permissions/default-permissions-com.sec.android.mimage.avatarstickers.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.app.earphonetypec.xml
-system/etc/permissions/privapp-permissions-com.samsung.android.aremojieditor.xml
-system/etc/permissions/privapp-permissions-com.sec.android.mimage.avatarstickers.xml
-system/priv-app/AREmojiEditor
-system/priv-app/AvatarEmojiSticker
 system/priv-app/EarphoneTypeC
-system/priv-app/IntelligentDynamicFpsService
 system/priv-app/SohService
-"
-PRODUCT_DEBLOAT+="
-priv-app/HotwordEnrollmentOKGoogleEx4HEXAGON
-priv-app/HotwordEnrollmentXGoogleEx4HEXAGON
 "
 
 # system_ext clean-up
@@ -104,11 +87,9 @@ SYSTEM_EXT_DEBLOAT+="
 app/QCC
 bin/qccsyshal@1.2-service
 etc/init/vendor.qti.hardware.qccsyshal@1.2-service.rc
-etc/permissions/com.android.hotwordenrollment.common.util.xml
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/privapp-permissions-com.qualcomm.location.xml
-framework/com.android.hotwordenrollment.common.util.jar
 framework/com.qti.location.sdk.jar
 framework/org.carconnectivity.android.digitalkey.rangingintent.jar
 framework/org.carconnectivity.android.digitalkey.secureelement.jar

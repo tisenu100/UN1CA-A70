@@ -360,6 +360,7 @@ app/YouTube
 overlay/GmsConfigOverlaySearchSelector.apk
 priv-app/Messages
 priv-app/SearchSelector
+priv-app/Velvet
 "
 SYSTEM_DEBLOAT+="
 system/app/AutomationTest_FB
