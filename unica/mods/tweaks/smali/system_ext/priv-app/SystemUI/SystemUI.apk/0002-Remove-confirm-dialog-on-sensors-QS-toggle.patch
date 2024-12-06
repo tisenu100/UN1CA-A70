@@ -1,6 +1,7 @@
-commit 985cb97e4d44bd3e3aa11655ccbef9a93599352a
-Author: tisenu100 <tisenu100@github.com>
-Date:   Mon Dec 2 17:59:07 2024 +0200
+
+From 10a5ad159dbc6d7bdaadfaafdbabc5dc5249cac6 Mon Sep 17 00:00:00 2001
+From: Salvo Giangreco <giangrecosalvo9@gmail.com>
+Date: Thu, 24 Oct 2024 23:58:53 +0200
 Subject: [PATCH] Remove confirm dialog on sensors QS toggle
 
 diff --git a/smali_classes2/com/android/systemui/qs/tiles/SensorPrivacyToggleTile.smali b/smali_classes2/com/android/systemui/qs/tiles/SensorPrivacyToggleTile.smali
@@ -167,3 +168,6 @@ index a4a3d09b..b03eff33 100644
 -    :goto_1
      return-void
  .end method
+-- 
+2.47.1
+
