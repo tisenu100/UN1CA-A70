@@ -23,14 +23,14 @@
     <local name="BACK_CAMERA_RESOLUTION_4BY3_LARGE" value="4032x3024" />
     <local name="BACK_CAMERA_RESOLUTION_16BY9_LARGE" value="4032x2268" />
     <local name="BACK_CAMERA_RESOLUTION_1BY1_LARGE" value="3024x3024" />
-    <local name="BACK_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="4032x3024" />
+    <local name="BACK_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="4032x2268" />
 
     <!-- Capture resolution - FRONT -->
     <local name="FRONT_CAMERA_RESOLUTION_FULL_RATIO" value="4032x1816" />
     <local name="FRONT_CAMERA_RESOLUTION_4BY3_LARGE" value="4032x3024" />
     <local name="FRONT_CAMERA_RESOLUTION_16BY9_LARGE" value="4032x2268" />
     <local name="FRONT_CAMERA_RESOLUTION_1BY1_LARGE" value="3024x3024" />
-    <local name="FRONT_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="4032x3024" />
+    <local name="FRONT_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="4032x2268" />
 
     <!-- Capture resolution - SUPER -->
     <local name="BACK_CAMERA_RESOLUTION_SUPER_RESOLUTION" value="6528x4896" />
@@ -70,8 +70,6 @@
     <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1440" value="false" hdr="true" hdr10="false" preview-size="1920x1440" snapshot-support="true" snapshot-size="3264x2448" vdis="false" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
     <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_176X144" value="true"/>
 
-
-
     <!-- Recording resolution - BACK -->
     <local name="BACK_CAMERA_RECORDING_DEFAULT_RESOLUTION" value="1920x1080"/>
     <local name="BACK_CAMERA_RECORDING_MIN_RESOLUTION" value="640x480"/>
@@ -86,13 +84,12 @@
     <!-- Recording resolution - FRONT -->
     <local name="FRONT_CAMERA_RECORDING_DEFAULT_RESOLUTION" value="1920x1080"/>
     <local name="FRONT_CAMERA_RECORDING_MIN_RESOLUTION" value="640x480"/>
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1440" value="false" hdr="false" hdr10="false" preview-size="1920x1440" snapshot-support="true" snapshot-size="3264x2448" vdis="true" effect="true" object-tracking="false"/>
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_3840X2160" value="true" hdr="false" hdr10="false" preview-size="1920x1080" snapshot-support="true" snapshot-size="3264x1836" vdis="false" super-vdis="false" effect="false" object-tracking="false" seamless-zoom-support="false" external-storage-support="true"/> 
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1080" value="true" hdr="true" hdr10="false" preview-size="1920x1080" snapshot-support="true" snapshot-size="3264x1836" vdis="true" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1080_60FPS" value="true" hdr="false" hdr10="false" preview-size="1920x1080" snapshot-support="true" snapshot-size="3264x1836" vdis="false" super-vdis="false" effect="false" object-tracking="false" external-storage-support="true"/>
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1280X720" value="true" hdr="true" hdr10="false" preview-size="1280x720" snapshot-support="true" snapshot-size="3264x1836" vdis="true" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1440X1440" value="true" hdr="true" hdr10="false" preview-size="1088x1088" snapshot-support="true" snapshot-size="2448x2448" vdis="true" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
-    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_2400X1080" value="true" hdr="true" hdr10="false" preview-size="2400x1080" snapshot-support="true" snapshot-size="3264x1468" vdis="true" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
+    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1080" value="true" hdr="true" hdr10="false" preview-size="1920x1080" snapshot-support="true" snapshot-size="4032x2268" vdis="false" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
+    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1440X1440" value="true" hdr="true" hdr10="false" preview-size="1088x1088" snapshot-support="true" snapshot-size="3024x3024" vdis="false" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
+    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1280X720" value="true" hdr="true" hdr10="false" preview-size="1280x720" snapshot-support="true" snapshot-size="4032x2268" vdis="false" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
+    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_2400X1080" value="true" hdr="true" hdr10="false" preview-size="2400x1080" snapshot-support="true" snapshot-size="4032x1816" vdis="false" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
+    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_1920X1440" value="false" hdr="true" hdr10="false" preview-size="1920x1440" snapshot-support="true" snapshot-size="3264x2448" vdis="false" super-vdis="false" effect="true" object-tracking="false" external-storage-support="true"/>
+    <local name="FRONT_CAMCORDER_RESOLUTION_FEATURE_MAP_176X144" value="true"/>
 
     <!-- Filters/Beauty features-->
     <local name="SUPPORT_MY_FILTER" value="true" />

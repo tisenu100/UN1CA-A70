@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# Debloat list for Galaxy A52 (a52q)
+# Debloat list for Galaxy A70 (a70q)
 # - Add entries inside the specific partition containing that file (<PARTITION>_DEBLOAT+="")
 # - DO NOT add the partition name at the start of any entry (eg. "/system/dpolicy_system")
 # - DO NOT add a slash at the start of any entry (eg. "/dpolicy_system")
@@ -73,8 +73,14 @@ system/priv-app/VideoScan
 
 # Apps debloat
 SYSTEM_DEBLOAT+="
+system/etc/default-permissions/default-permissions-com.sec.android.mimage.avatarstickers.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.app.earphonetypec.xml
+system/etc/permissions/privapp-permissions-com.samsung.android.aremojieditor.xml
+system/etc/permissions/privapp-permissions-com.sec.android.mimage.avatarstickers.xml
+system/priv-app/AREmojiEditor
+system/priv-app/AvatarEmojiSticker
 system/priv-app/EarphoneTypeC
+system/priv-app/IntelligentDynamicFpsService
 system/priv-app/SohService
 "
 

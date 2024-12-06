@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="config_Extra_Brightness_Display_Solution_Brightness_Value">
-        <item>1.4</item>
+    <string-array name="config_Display_Solution_Gamma_Value">
+        <item>2.20</item>
     </string-array>
     <integer-array name="config_HysteresisBrightInputLux">
         <item>0</item>
@@ -866,6 +866,13 @@
         <item>575</item>
         <item>600</item>
     </integer-array>
+    <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>10</item>
+        <item>80</item>
+        <item>162</item>
+        <item>190</item>
+        <item>255</item>
+    </integer-array>
     <integer-array name="config_autoBrightnessLevels">
         <item>1</item>
         <item>2</item>
@@ -895,6 +902,11 @@
         <item>20000</item>
         <item>30000</item>
         <item>40000</item>
+    </integer-array>
+    <integer-array name="config_minimumExpressiveBrightnessValues">
+        <item>15</item>
+        <item>20</item>
+        <item>27</item>
     </integer-array>
     <integer-array name="config_screenBrightnessBacklight">
         <item>0</item>
@@ -1155,7 +1167,7 @@
         <item>255</item>
         <item>365</item>
     </integer-array>
-    <array name="config_screenBrightnessNits">
+    <integer-array name="config_screenBrightnessNits">
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -1413,7 +1425,7 @@
         <item>419</item>
         <item>420</item>
         <item>600</item>
-    </array>
+    </integer-array>
     <integer-array name="config_screenBrightnessRangeForClearView">
         <item>255</item>
         <item>365</item>
