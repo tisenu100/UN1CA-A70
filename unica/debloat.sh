@@ -315,7 +315,7 @@ priv-app/SetupWizard/oat
 "
 PRODUCT_DEBLOAT+="
 app/AssistantShell/oat
-app/Chrome/oat
+app/Chrome64/oat
 app/DuoStub/oat
 app/Gmail2/oat
 app/GoogleCalendarSyncAdapter/oat
@@ -352,7 +352,7 @@ etc/init/vendor_flash_recovery.rc
 # Apps debloat
 PRODUCT_DEBLOAT+="
 app/AssistantShell
-app/Chrome
+app/Chrome64
 app/DuoStub
 app/Gmail2
 app/Maps

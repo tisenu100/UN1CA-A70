@@ -77,11 +77,13 @@ system/etc/default-permissions/default-permissions-com.sec.android.mimage.avatar
 system/etc/permissions/privapp-permissions-com.samsung.android.app.earphonetypec.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.aremojieditor.xml
 system/etc/permissions/privapp-permissions-com.sec.android.mimage.avatarstickers.xml
+system/priv-app/AREmoji
 system/priv-app/AREmojiEditor
 system/priv-app/AvatarEmojiSticker
 system/priv-app/EarphoneTypeC
 system/priv-app/IntelligentDynamicFpsService
 system/priv-app/SohService
+system/priv-app/StickerFaceARAvatar
 "
 
 # system_ext clean-up

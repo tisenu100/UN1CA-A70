@@ -19,7 +19,7 @@ index 8f886c6..981d085 100644
 -
 -    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 -
--    const-string v1, "3.0"
+-    const-string v1, "2.0"
 -
 -    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 -
@@ -27,7 +27,7 @@ index 8f886c6..981d085 100644
 -
 -    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 -
--    const-string v1, "3DD"
+-    const-string v1, "1D"
 -
 -    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 -
