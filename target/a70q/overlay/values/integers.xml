@@ -6,15 +6,14 @@
     <integer name="config_AFPC_size">843547</integer>
     <integer name="config_AFPC_width">360</integer>
     <integer name="config_acl_version">4</integer>
-    <integer name="config_autoBrightnessHbmAmbientLux">5000</integer>
+    <integer name="config_autoBrightnessHbmAmbientLux">3000</integer>
     <integer name="config_lowLimitAtHighestAutoBrightnessLevel">255</integer>
-    <integer name="config_luxErrorCorrectionEndBrightness">255</integer>
-    <integer name="config_luxErrorCorrectionMaxError">5</integer>
-    <integer name="config_luxErrorCorrectionStartBrightness">77</integer>
     <integer name="config_minimumBrightnessStepValue">1</integer>
-    <integer name="config_screenBrightnessDim">15</integer>
-    <integer name="config_screenBrightnessExtendedMaximum">365</integer>
+    <integer name="config_screenBrightnessDim">13</integer>
+    <integer name="config_screenBrightnessExtendedMaximum">1275</integer>
+    <integer name="config_screenBrightnessForClearView">106</integer>
     <integer name="config_screenBrightnessSettingDefault">128</integer>
     <integer name="config_screenBrightnessSettingMaximum">255</integer>
     <integer name="config_screenBrightnessSettingMinimum">0</integer>
+    <integer name="config_bluetooth_operating_voltage_mv">3300</integer>
 </resources>
