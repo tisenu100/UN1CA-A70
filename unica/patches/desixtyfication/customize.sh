@@ -112,11 +112,11 @@ cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/system_ext/lib/"* "$WORK_DIR/sy
 # Intentionally break the source firmwares file contexts to make our life easier
 {
     sed "s/^\/system_ext/\/system\/system_ext/g" "$FW_DIR/${MODEL}_${REGION}/file_context-system_ext"
-} >> "$WORK_DIR/configs/file_context-system"
+} >> "$FW_DIR/${MODEL}_${REGION}/file_context-system"
 
 {
     sed "1d" "$FW_DIR/${MODEL}_${REGION}/fs_config-system_ext" | sed "s/^system_ext/system\/system_ext/g"
-} >> "$WORK_DIR/configs/fs_config-system"
+} >> "$FW_DIR/${MODEL}_${REGION}/fs_config-system"
 
 cat "$FW_DIR/${MODEL}_${REGION}/fs_config-system" | grep -F "system/system_ext/lib" >> "$WORK_DIR/configs/fs_config-system"
 cat "$FW_DIR/${MODEL}_${REGION}/file_context-system" | grep -F "system/system_ext/lib" >> "$WORK_DIR/configs/file_context-system"
