@@ -145,6 +145,7 @@ ADD_TO_WORK_DIR "system" "system/apex/com.android.vndk.current.apex" 0 0 644 "u:
 if [[ "$SOURCE_VNDK_VERSION" != "$TARGET_VNDK_VERSION" ]]; then
 echo "Support legacy APEX"
 
+# This might get depracated in OneUI 7 unless we use Galaxy S25's firmware
 mkdir $WORK_DIR/system/system/system_ext/apex
 echo "system/system_ext/apex 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
 echo "system/system_ext/apex u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
@@ -156,6 +157,9 @@ ADD_TO_WORK_DIR "system" "system/bin/gatekeeperd" 0 2000 755 "u:object_r:gatekee
 echo "Patching Engmode"
 ADD_TO_WORK_DIR "system" "system/lib64/lib.engmode.samsung.so" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "system" "system/lib64/lib.engmodejni.samsung.so" 0 0 644 "u:object_r:system_file:s0"
+
+echo "Patching Snap"
+ADD_TO_WORK_DIR "system" "system/lib64/libsnap_aidl.snap.samsung.so" 0 0 644 "u:object_r:system_file:s0"
 
 echo "Patching SDHMS"
 ADD_TO_WORK_DIR "system" "system/priv-app/SamsungDeviceHealthManagerService/SamsungDeviceHealthManagerService.apk" 0 0 644 "u:object_r:system_file:s0"
