@@ -85,6 +85,9 @@ echo "Prepairing..."
 if [[ "$SOURCE_EXTRA_FIRMWARES" != "SM-S911"* ]]; then
     echo "Not a valid firmware to inherit"
     exit 1
+elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]]; then
+    echo "This isn't an 64-bit only firmware"
+    exit 1
 fi
 
 IFS=':' read -a SOURCE_EXTRA_FIRMWARES <<< "$SOURCE_EXTRA_FIRMWARES"
