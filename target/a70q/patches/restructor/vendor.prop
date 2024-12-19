@@ -1,0 +1,2 @@
+# Change the NFC model to the one used by the European A70
+ro.vendor.nfc.feature.chipname=NXP_SN100U

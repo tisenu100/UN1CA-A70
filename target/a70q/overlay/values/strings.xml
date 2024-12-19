@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="config_mainBuiltInDisplayCutout">M-35.93,0C-29.26,0,-23.46,3.85,-22.46,9.56l.12.73a22.69,22.69,0,0,0,44.68,0l.12-.73C23.5,3.85,29.26,0,35.93,0Z @dp</string>
-    <string name="config_wifi_tcp_buffers" translatable="false">524288,1048576,5505024,262144,524288,5505024</string>
-    <string name="config_mobile_hotspot_provision_app_no_ui">com.samsung.provisioning.SILENT_PROVISIONING_CHECK</string>
-    <string name="config_mobile_hotspot_provision_response">com.samsung.provisioning.SILENT_PROVISIONING_CHECK_RESULT</string>
-</resources>

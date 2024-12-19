@@ -1,0 +1,12 @@
+service nfc_hal_service /vendor/bin/hw/nxp.android.hardware.nfc@1.1-service
+    interface android.hardware.nfc@1.0::INfc default
+    interface android.hardware.nfc@1.1::INfc default
+    interface android.hardware.nfc@1.2::INfc default
+    interface vendor.nxp.nxpnfc@1.0::INxpNfc default
+    interface vendor.nxp.nxpnfc@1.1::INxpNfc default
+    class hal
+    oneshot
+    disabled
+    user nfc
+    group nfc
+    writepid /dev/stune/foreground/tasks

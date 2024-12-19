@@ -86,28 +86,6 @@ REGION=$(echo -n "$TARGET_FIRMWARE" | cut -d "/" -f 2)
 echo "Add stock /odm/etc/media_profiles_V1_0.xml"
 ADD_TO_WORK_DIR "odm" "etc/media_profiles_V1_0.xml" 0 0 644 "u:object_r:vendor_configs_file:s0"
 
-echo "Reverting to SoundBooster v1050"
-sed -i "s/SoundBooster_ver1100/SoundBooster_ver1050/g" "$WORK_DIR/configs/file_context-system"
-sed -i "s/SoundBooster_ver1100/SoundBooster_ver1050/g" "$WORK_DIR/configs/fs_config-system"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/lib_SoundBooster_ver1100.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib/lib_SoundBooster_ver1100.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libsamsungSoundbooster_plus_legacy.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib/libsamsungSoundbooster_plus_legacy.so"
-ADD_TO_WORK_DIR "system" "system/lib64/lib_SoundBooster_ver1050.so" 0 0 644 "u:object_r:system_lib_file:s0"
-ADD_TO_WORK_DIR "system" "system/lib64/libsamsungSoundbooster_plus_legacy.so" 0 0 644 "u:object_r:system_lib_file:s0"
-ADD_TO_WORK_DIR "system" "system/lib/lib_SoundBooster_ver1050.so" 0 0 644 "u:object_r:system_lib_file:s0"
-ADD_TO_WORK_DIR "system" "system/lib/libsamsungSoundbooster_plus_legacy.so" 0 0 644 "u:object_r:system_lib_file:s0"
-
-echo "Fix Google Assistant"
-rm -rf "$WORK_DIR/product/priv-app/HotwordEnrollmentOKGoogleEx4HEXAGON"
-cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/product/priv-app/HotwordEnrollmentOKGoogleEx3HEXAGON" "$WORK_DIR/product/priv-app"
-rm -rf "$WORK_DIR/product/priv-app/HotwordEnrollmentXGoogleEx4HEXAGON"
-cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/product/priv-app/HotwordEnrollmentXGoogleEx3HEXAGON" "$WORK_DIR/product/priv-app"
-sed -i "s/HotwordEnrollmentXGoogleEx4HEXAGON/HotwordEnrollmentXGoogleEx3HEXAGON/g" "$WORK_DIR/configs/file_context-product"
-sed -i "s/HotwordEnrollmentXGoogleEx4HEXAGON/HotwordEnrollmentXGoogleEx3HEXAGON/g" "$WORK_DIR/configs/fs_config-product"
-sed -i "s/HotwordEnrollmentOKGoogleEx4HEXAGON/HotwordEnrollmentOKGoogleEx3HEXAGON/g" "$WORK_DIR/configs/file_context-product"
-sed -i "s/HotwordEnrollmentOKGoogleEx4HEXAGON/HotwordEnrollmentOKGoogleEx3HEXAGON/g" "$WORK_DIR/configs/fs_config-product"
-
 echo "Add stock CameraLightSensor app"
 ADD_TO_WORK_DIR "system" "system/etc/permissions/privapp-permissions-com.samsung.adaptivebrightnessgo.cameralightsensor.xml" \
     0 0 644 "u:object_r:system_file:s0"
@@ -129,12 +107,6 @@ echo "Add stock system features"
 ADD_TO_WORK_DIR "system" "system/etc/permissions/com.sec.feature.cover.minisviewwalletcover.xml" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "system" "system/etc/permissions/com.sec.feature.nsflp_level_600.xml" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "system" "system/etc/permissions/com.sec.feature.sensorhub_level40.xml" 0 0 644 "u:object_r:system_file:s0"
-
-echo "Add stock ev_lux_map_config.xml"
-ADD_TO_WORK_DIR "system" "system/etc/ev_lux_map_config.xml" 0 0 644 "u:object_r:system_file:s0"
-
-echo "Add stock sensorhub_services.json"
-ADD_TO_WORK_DIR "system" "system/etc/sensorhub_services.json" 0 0 644 "u:object_r:system_file:s0"
 
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libhdcp_client_aidl.so"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libhdcp2.so"
