@@ -47,7 +47,7 @@ system/lib64/vendor.samsung.hardware.security.hdcp.keyprovisioning@1.0.so
 
 # GameDriver
 SYSTEM_DEBLOAT+="
-system/priv-app/GameDriver-SM8550
+system/priv-app/GameDriver-SM8650
 "
 
 # Camera SDK
@@ -77,12 +77,17 @@ system/etc/default-permissions/default-permissions-com.sec.android.mimage.avatar
 system/etc/permissions/privapp-permissions-com.samsung.android.app.earphonetypec.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.aremojieditor.xml
 system/etc/permissions/privapp-permissions-com.sec.android.mimage.avatarstickers.xml
+system/app/AirGlance
+system/app/LiveDrawing
+system/priv-app/AirCommand
+system/priv-app/AirReadingGlass
 system/priv-app/AREmoji
 system/priv-app/AREmojiEditor
 system/priv-app/AvatarEmojiSticker
 system/priv-app/EarphoneTypeC
 system/priv-app/IntelligentDynamicFpsService
 system/priv-app/SohService
+system/priv-app/SmartEye
 system/priv-app/StickerFaceARAvatar
 "
 
