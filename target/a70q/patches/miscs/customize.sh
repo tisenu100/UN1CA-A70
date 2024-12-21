@@ -47,8 +47,9 @@ sed -i "/# Removed by /d" "$WORK_DIR/product/etc/build.prop" \
 echo "Disable OEM unlock toggle"
 SET_PROP "ro.oem_unlock_supported" "0" "$WORK_DIR/vendor/default.prop"
 
-echo "Enable adaptive FPS"
-SET_PROP "ro.surface_flinger.use_content_detection_for_refresh_rate" "true" "$WORK_DIR/vendor/default.prop"
-sed -i \
-    "/use_content_detection/a ro.surface_flinger.set_idle_timer_ms=3000\nro.surface_flinger.set_touch_timer_ms=500\nro.surface_flinger.set_display_power_timer_ms=1000" \
-    "$WORK_DIR/vendor/default.prop"
+echo "Patch Surfaceflinger Config"
+SET_PROP "ro.surface_flinger.use_content_detection_for_refresh_rate" "false" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ro.surface_flinger.has_wide_color_display" "false" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ro.surface_flinger.has_HDR_display" "false" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ro.surface_flinger.use_color_management" "false" "$WORK_DIR/vendor/default.prop"
+

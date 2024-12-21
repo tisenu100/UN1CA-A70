@@ -82,7 +82,7 @@ REMOVE_FROM_WORK_DIR()
 
 echo "Prepairing..."
 
-if [[ "$SOURCE_EXTRA_FIRMWARES" != "SM-S911"* ]]; then
+if [[ "$SOURCE_EXTRA_FIRMWARES" != "SM-S918"* ]]; then
     echo "Not a valid firmware to inherit"
     exit 1
 elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]]; then

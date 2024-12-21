@@ -242,8 +242,11 @@ if ! $SOURCE_HAS_QHD_DISPLAY; then
     fi
 else
     if ! $TARGET_HAS_QHD_DISPLAY; then
-        # TODO: won't be necessary anyway
-        true
+	if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi_64" ]] then
+		echo "Applying multi resolution disable patches"
+        	APPLY_PATCH "system/framework/framework.jar" "resolution/multi_res/framework.jar/0002-Disable-dynamic-resolution-control.patch"
+        	APPLY_PATCH "system/priv-app/SecSettings/SecSettings.apk" "resolution/multi_res/SecSettings.apk/0002-Disable-dynamic-resolution-control.patch"
+        fi
     fi
 fi
 
