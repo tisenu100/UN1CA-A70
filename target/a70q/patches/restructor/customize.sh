@@ -328,8 +328,22 @@ REMOVE_FROM_WORK_DIR "$WORK_DIR/vendor/lib64/camera/com.samsung.sensormodule.0_0
 
 # Take down System now
 echo "Remove System Blobs"
-
 REMOVE_FROM_WORK_DIR "$WORK_DIR/product/overlay/framework-res__auto_generated_rro_product.apk"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/lib64/lib_SoundBooster_ver2000.so"
 
+# Copy the blobs
+echo "Installing A70 drivers"
+cp -r $SRC_DIR/target/a70q/patches/restructor/A705FN/* $WORK_DIR
+
+# Update NFC Prop
+echo "Update NFC prop"
+SET_PROP "ro.vendor.nfc.feature.chipname" "NXP_SN100U" "$WORK_DIR/vendor/build.prop"
+SET_PROP "ro.vendor.nfc.support.ese" "true" "$WORK_DIR/vendor/build.prop"
+
+# A70 doesn't provide any info about it's antenna position
+SET_PROP -d "ro.vendor.nfc.info.antpos" "$WORK_DIR/vendor/build.prop"
+SET_PROP -d "ro.vendor.nfc.info.antposX" "$WORK_DIR/vendor/build.prop"
+SET_PROP -d "ro.vendor.nfc.info.antposY" "$WORK_DIR/vendor/build.prop"
+SET_PROP -d "ro.vendor.nfc.info.deviceWidth" "$WORK_DIR/vendor/build.prop"
+SET_PROP -d "ro.vendor.nfc.info.deviceHeight" "$WORK_DIR/vendor/build.prop"
 
