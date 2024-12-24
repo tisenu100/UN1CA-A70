@@ -1,5 +1,3 @@
-SKIPUNZIP=1
-
 # [
 ADD_TO_WORK_DIR()
 {

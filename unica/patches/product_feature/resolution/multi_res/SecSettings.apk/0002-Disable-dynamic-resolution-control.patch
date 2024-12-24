@@ -1,7 +1,7 @@
 From 86c3b1fb54902f678ee70f711fe8ae7ae841d07a Mon Sep 17 00:00:00 2001
 From: Salvo Giangreco <giangrecosalvo9@gmail.com>
 Date: Wed, 25 Sep 2024 10:11:29 +0200
-Subject: [PATCH] Enable dynamic resolution control
+Subject: [PATCH] Disable dynamic resolution control
 
 ---
  .../android/settings/DisplaySettings$3.smali  | 457 +++++++++---------
