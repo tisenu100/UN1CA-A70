@@ -78,6 +78,42 @@ REMOVE_FROM_WORK_DIR()
         sed -i "/$FILE/d" "$WORK_DIR/configs/file_context-$PARTITION"
     fi
 }
+
+SET_PROP()
+{
+    local PROP="$1"
+    local VALUE="$2"
+    local FILE="$3"
+
+    if [ ! -f "$FILE" ]; then
+        echo "File not found: $FILE"
+        return 1
+    fi
+
+    if [[ "$2" == "-d" ]] || [[ "$2" == "--delete" ]]; then
+        PROP="$(echo -n "$PROP" | sed 's/=//g')"
+        if grep -Fq "$PROP" "$FILE"; then
+            echo "Deleting \"$PROP\" prop in $FILE" | sed "s.$WORK_DIR..g"
+            sed -i "/^$PROP/d" "$FILE"
+        fi
+    else
+        if grep -Fq "$PROP" "$FILE"; then
+            local LINES
+
+            echo "Replacing \"$PROP\" prop with \"$VALUE\" in $FILE" | sed "s.$WORK_DIR..g"
+            LINES="$(sed -n "/^${PROP}\b/=" "$FILE")"
+            for l in $LINES; do
+                sed -i "$l c${PROP}=${VALUE}" "$FILE"
+            done
+        else
+            echo "Adding \"$PROP\" prop with \"$VALUE\" in $FILE" | sed "s.$WORK_DIR..g"
+            if ! grep -q "Added by scripts" "$FILE"; then
+                echo "# Added by scripts/internal/apply_modules.sh" >> "$FILE"
+            fi
+            echo "$PROP=$VALUE" >> "$FILE"
+        fi
+    fi
+}
 # ]
 
 echo "Prepairing..."
@@ -94,8 +130,8 @@ IFS=':' read -a SOURCE_EXTRA_FIRMWARES <<< "$SOURCE_EXTRA_FIRMWARES"
 MODEL=$(echo -n "${SOURCE_EXTRA_FIRMWARES[0]}" | cut -d "/" -f 1)
 REGION=$(echo -n "${SOURCE_EXTRA_FIRMWARES[0]}" | cut -d "/" -f 2)
 
-
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib"
+echo "system/lib 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+echo "system/lib u:object_r:system_lib_file:s0" >> "$WORK_DIR/configs/file_context-system"
 
 # Copy libraries from system... Easy
 echo "Copying all valid libraries 1/2 (system)"
@@ -166,5 +202,13 @@ ADD_TO_WORK_DIR "system" "system/lib64/libsnap_aidl.snap.samsung.so" 0 0 644 "u:
 
 echo "Patching SDHMS"
 ADD_TO_WORK_DIR "system" "system/priv-app/SamsungDeviceHealthManagerService/SamsungDeviceHealthManagerService.apk" 0 0 644 "u:object_r:system_file:s0"
+
+echo "Removing 32-Bit flags"
+SET_PROP "ro.zygote" "zygote64" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ro.bionic.2nd_arch" "-d" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ro.bionic.2nd_cpu_variant" "-d" "$WORK_DIR/vendor/default.prop"
+SET_PROP "persist.sys.dalvik.vm.lib.2" "-d" "$WORK_DIR/vendor/default.prop"
+SET_PROP "dalvik.vm.isa.arm.variant" "-d" "$WORK_DIR/vendor/default.prop"
+SET_PROP "dalvik.vm.isa.arm.features" "-d" "$WORK_DIR/vendor/default.prop"
 
 echo "Desixtyfication complete"

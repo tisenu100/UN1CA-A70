@@ -34,7 +34,7 @@ index eec8bd9c..32d7e1a4 100644
          }
  
 -        if (config.netSecConf && config.aaptVersion == 1) {
--            System.err.println("-n / --net-sec-conf is not supported with legacy aapt.");
+-            System.err.println("-n / --net-sec-conf is not supported with legacy AAPT.");
 +        if ((config.netSecConf || config.shortenResPaths || config.enableSparseEncoding || config.collapseResNames) && config.aaptVersion == 1) {
 +            System.err.println("-n / --net-sec-conf, -srp / --shorten-res-paths, -ese / --enable-sparse-encoding, -crn / --collapse-res-names are not supported with legacy aapt.");
              System.exit(1);

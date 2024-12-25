@@ -246,6 +246,7 @@ system/priv-app/PeripheralFramework/oat
 system/priv-app/PetService/oat
 system/priv-app/PhoneErrService/oat
 system/priv-app/PhotoRemasterService/oat
+system/priv-app/QMDService/oat
 system/priv-app/Quickboard/oat
 system/priv-app/Routines/oat
 system/priv-app/SamsungBilling/oat
@@ -438,6 +439,7 @@ system/priv-app/GameHome
 system/priv-app/ModemServiceMode
 system/priv-app/OneDrive_Samsung_v3
 system/priv-app/PaymentFramework
+system/priv-app/QMDService
 system/priv-app/SEMFactoryApp
 system/priv-app/SOAgent7
 system/priv-app/SamsungCarKeyFw

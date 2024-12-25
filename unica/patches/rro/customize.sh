@@ -1,8 +1,8 @@
 SKIPUNZIP=1
 
-if [[ -d "$TARGET_CODENAME" == "a70q" ]]; then
+if [[ "$TARGET_CODENAME" == "a70q" ]]; then
     echo "Target doesn't have a product overlay"
-    exit 1
+    exit 0
 fi
 
 if [[ -d "$SRC_DIR/target/$TARGET_CODENAME/overlay" ]]; then
