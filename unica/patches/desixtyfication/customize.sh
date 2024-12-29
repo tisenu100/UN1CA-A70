@@ -219,11 +219,5 @@ ADD_TO_WORK_DIR "system" "system/priv-app/SamsungDeviceHealthManagerService/Sams
 
 echo "Removing 32-Bit flags"
 SET_PROP "ro.zygote" "zygote64" "$WORK_DIR/vendor/default.prop"
-SET_PROP "ro.bionic.2nd_arch" "-d" "$WORK_DIR/vendor/default.prop"
-SET_PROP "ro.bionic.2nd_cpu_variant" "-d" "$WORK_DIR/vendor/default.prop"
-SET_PROP "dalvik.vm.isa.arm.variant" "-d" "$WORK_DIR/vendor/default.prop"
-SET_PROP "dalvik.vm.isa.arm.features" "-d" "$WORK_DIR/vendor/default.prop"
-SET_PROP "ro.vendor.product.cpu.abilist" "arm64-v8a" "$WORK_DIR/vendor/build.prop"
-SET_PROP "ro.vendor.product.cpu.abilist32" "-d" "$WORK_DIR/vendor/build.prop"
 
 echo "Desixtyfication complete"
