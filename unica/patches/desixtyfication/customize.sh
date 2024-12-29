@@ -144,7 +144,7 @@ echo "Copying all valid libraries 2/2 (system_ext)"
 
 mkdir $WORK_DIR/system/system/system_ext/lib
 echo "system/system_ext/lib 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
-echo "system/system_ext/lib u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+echo "/system/system_ext/lib u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
 
 cp -a --preserve=all "$FW_DIR/${MODEL}_${REGION}/system_ext/lib/"* "$WORK_DIR/system/system/system_ext/lib"
 
@@ -177,21 +177,35 @@ ADD_TO_WORK_DIR "system" "system/apex/com.android.uwb.capex" 0 0 644 "u:object_r
 ADD_TO_WORK_DIR "system" "system/apex/com.android.virt.apex" 0 0 644 "u:object_r:system_file:s0"
 ADD_TO_WORK_DIR "system" "system/apex/com.android.vndk.current.apex" 0 0 644 "u:object_r:system_file:s0"
 
+# This might get depracated in OneUI 7 unless we use Galaxy S25's firmware
+if [[ "$SOURCE_VNDK_VERSION" != "$TARGET_VNDK_VERSION" ]]; then
+echo "Support legacy APEX"
+mkdir $WORK_DIR/system/system/system_ext/apex
+echo "system/system_ext/apex 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+echo "/system/system_ext/apex u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+
+# This is meant to fool Un1ca's VNDK downgrade patch
+echo "" >> $WORK_DIR/system/system/system_ext/apex/com.android.vndk.v$SOURCE_VNDK_VERSION.apex
+echo "system/system_ext/apex/com.android.vndk.v"$SOURCE_VNDK_VERSION".apex 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
+echo "/system/system_ext/apex/com\\.android\\.vndk\\.v"$SOURCE_VNDK_VERSION"\\.apex u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
+fi
+
 #
 # All the patches below target mostly A52/A70 vendor
 #
 
-if [[ "$SOURCE_VNDK_VERSION" != "$TARGET_VNDK_VERSION" ]]; then
-echo "Support legacy APEX"
-
-# This might get depracated in OneUI 7 unless we use Galaxy S25's firmware
-mkdir $WORK_DIR/system/system/system_ext/apex
-echo "system/system_ext/apex 0 0 755 capabilities=0x0" >> "$WORK_DIR/configs/fs_config-system"
-echo "system/system_ext/apex u:object_r:system_file:s0" >> "$WORK_DIR/configs/file_context-system"
-fi
-
 echo "Patching Gatekeeper"
 ADD_TO_WORK_DIR "system" "system/bin/gatekeeperd" 0 2000 755 "u:object_r:gatekeeperd_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker64" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker_asan64" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker_hwasan64" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker64" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan64" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_hwasan64" 0 2000 755 "u:object_r:system_file:s0"
 
 echo "Patching Engmode"
 ADD_TO_WORK_DIR "system" "system/lib64/lib.engmode.samsung.so" 0 0 644 "u:object_r:system_file:s0"
@@ -207,8 +221,9 @@ echo "Removing 32-Bit flags"
 SET_PROP "ro.zygote" "zygote64" "$WORK_DIR/vendor/default.prop"
 SET_PROP "ro.bionic.2nd_arch" "-d" "$WORK_DIR/vendor/default.prop"
 SET_PROP "ro.bionic.2nd_cpu_variant" "-d" "$WORK_DIR/vendor/default.prop"
-SET_PROP "persist.sys.dalvik.vm.lib.2" "-d" "$WORK_DIR/vendor/default.prop"
 SET_PROP "dalvik.vm.isa.arm.variant" "-d" "$WORK_DIR/vendor/default.prop"
 SET_PROP "dalvik.vm.isa.arm.features" "-d" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ro.vendor.product.cpu.abilist" "arm64-v8a" "$WORK_DIR/vendor/build.prop"
+SET_PROP "ro.vendor.product.cpu.abilist32" "-d" "$WORK_DIR/vendor/build.prop"
 
 echo "Desixtyfication complete"

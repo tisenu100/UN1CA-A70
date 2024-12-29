@@ -373,7 +373,7 @@ REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/lib_SoundBooster_ver2000.so"
 
 # Copy the blobs
 echo "Installing A70 drivers"
-cp -r $SRC_DIR/target/a70q/patches/restructor/A705FN/* $WORK_DIR/vendor
+cp -r $SRC_DIR/target/a70q/patches/restructor/A705FN/* $WORK_DIR
 
 # SELinux and prop config
 echo "Configuring properties"
@@ -1120,6 +1120,8 @@ done
 REMOVE_FROM_WORK_DIR "$WORK_DIR/vendor/odm"
 
 echo "Patching ODM under vendor"
+
+ADD_TO_WORK_DIR_CONTEXT "vendor" "odm/etc/media_profiles_V1_0.xml" 0 2000 644 "u:object_r:vendor_lib_file:s0"
 
 echo "Revert to VNDK30 ODM SEPolicy"
 ADD_TO_WORK_DIR "odm" "etc/selinux/precompiled_sepolicy" 0 0 644 "u:object_r:vendor_configs_file:s0"

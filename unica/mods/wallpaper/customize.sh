@@ -28,7 +28,7 @@ RESIZE_APK()
     do
         ffmpeg -i "$f" -c:v libx265 -tag:v hvc1 -c:a copy \
             -crf 18 -movflags use_metadata_tags -map_metadata 0 \
-            -vf "scale=$MP4_RES,setsar=1:1" -video_track_timescale 60000 \
+            -vf "scale=$MP4_RES,setsar=1:1" -video_track_timescale 120000 \
             "$(dirname "$f")/temp.mp4" &> /dev/null
         mv -f "$(dirname "$f")/temp.mp4" "$f"
     done
