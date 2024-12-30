@@ -130,7 +130,6 @@
 
     <!-- Front dynamic FOV features -->
     <local name="SUPPORT_FRONT_CAMERA_DYNAMIC_FOV" value="false"/>
-    <local name="FRONT_DYNAMIC_FOV_CAMERA_ID" value="2"/>
 
     <!-- Etc. features -->
     <local name="DEFAULT_MAX_ZOOM_VALUE" value="800" />
