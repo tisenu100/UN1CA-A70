@@ -166,6 +166,16 @@ cat "$FW_DIR/${MODEL}_${REGION}/file_context-system" | grep -F "system/system_ex
 
 echo "Patching linker"
 ADD_TO_WORK_DIR "system" "system/apex/com.android.runtime.apex" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker64" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker_asan64" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/linker_hwasan64" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker64" 0 2000 755 "u:object_r:system_linker_exec:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan64" 0 2000 755 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_hwasan64" 0 2000 755 "u:object_r:system_file:s0"
 
 echo "Adding miscellaneous System APEX components"
 ADD_TO_WORK_DIR "system" "system/apex/com.android.apex.cts.shim.apex" 0 0 644 "u:object_r:system_file:s0"
@@ -196,16 +206,6 @@ fi
 
 echo "Patching Gatekeeper"
 ADD_TO_WORK_DIR "system" "system/bin/gatekeeperd" 0 2000 755 "u:object_r:gatekeeperd_exec:s0"
-ADD_TO_WORK_DIR "system" "system/bin/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
-ADD_TO_WORK_DIR "system" "system/bin/linker64" 0 2000 755 "u:object_r:system_linker_exec:s0"
-ADD_TO_WORK_DIR "system" "system/bin/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "system" "system/bin/linker_asan64" 0 2000 755 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "system" "system/bin/linker_hwasan64" 0 2000 755 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker" 0 2000 755 "u:object_r:system_linker_exec:s0"
-ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker64" 0 2000 755 "u:object_r:system_linker_exec:s0"
-ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan" 0 2000 755 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_asan64" 0 2000 755 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "system" "system/bin/bootstrap/linker_hwasan64" 0 2000 755 "u:object_r:system_file:s0"
 
 echo "Patching Engmode"
 ADD_TO_WORK_DIR "system" "system/lib64/lib.engmode.samsung.so" 0 0 644 "u:object_r:system_file:s0"
