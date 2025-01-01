@@ -15,6 +15,12 @@ RESIZE_APK()
         MP4_RES="1440:-1"
     fi
 
+    if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]] then
+         FRAME_TARGET="60000"
+    else
+         FRAME_TARGET="120000"
+    fi
+
     echo "Resize wallpaper-res.apk"
     if [ ! -d "$APKTOOL_DIR/system/priv-app/wallpaper-res/wallpaper-res.apk" ]; then
         bash "$SRC_DIR/scripts/apktool.sh" d "system/priv-app/wallpaper-res/wallpaper-res.apk"
@@ -26,13 +32,11 @@ RESIZE_APK()
     done
     for f in "$APKTOOL_DIR/system/priv-app/wallpaper-res/wallpaper-res.apk/res/raw/"*.mp4
     do
-	if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]] then
-            ffmpeg -i "$f" -c:v libx265 -tag:v hvc1 -c:a copy \
-                -crf 18 -movflags use_metadata_tags -map_metadata 0 \
-                -vf "scale=$MP4_RES,setsar=1:1" -video_track_timescale 60000 \
-                "$(dirname "$f")/temp.mp4" &> /dev/null
-            mv -f "$(dirname "$f")/temp.mp4" "$f"
-        fi
+        ffmpeg -i "$f" -c:v libx265 -tag:v hvc1 -c:a copy \
+            -crf 18 -movflags use_metadata_tags -map_metadata 0 \
+            -vf "scale=$MP4_RES,setsar=1:1" -video_track_timescale $FRAME_TARGET \
+            "$(dirname "$f")/temp.mp4" &> /dev/null
+        mv -f "$(dirname "$f")/temp.mp4" "$f"
     done
 }
 # ]

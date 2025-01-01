@@ -21,15 +21,13 @@ DOWNLOAD_APK()
 # Samsung Internet Browser
 # https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser
 if [[ "$TARGET_CODENAME" != "a71" ]]; then
-    if [ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]] then
-        DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.sbrowser")" \
-            "SBrowser/SBrowser.apk"
-    fi
+    DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.sbrowser")" \
+        "SBrowser/SBrowser.apk"
 fi
 
 # For QSSI_64 let's ship optionally applications that come with a brand new device
 #
-if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi_64" ]] then
+if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi_64" ]]; then
     echo "Shipping applications"
 
     DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.popupcalculator")" \
@@ -38,8 +36,6 @@ if [[ "$TARGET_SINGLE_SYSTEM_IMAGE" == "qssi_64" ]] then
         "Calender/Calendar.apk"
     DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.clockpackage")" \
         "Clock/Clock.apk"
-    DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.sbrowser")" \
-        "SBrowser/SBrowser.apk"
 fi
 
 sed -i "/system\/preload/d" "$WORK_DIR/configs/fs_config-system" \
