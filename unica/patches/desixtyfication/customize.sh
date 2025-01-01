@@ -224,6 +224,10 @@ echo "Removing EUICC MEP"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/etc/permissions/privapp-permissions-com.samsung.euicc.mep.xml"
 
 echo "Adjust Dynamic IMEI"
-SET_PROP "ril.support.dynamic_imei" "true" "$WORK_DIR/vendor/default.prop"
+SET_PROP "ril.support.dynamic_imei" "true" "$WORK_DIR/system/system/build.prop"
+
+echo "Remove SoundBoosterEQ"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libsoundboostereq_legacy.so"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/lib_SAG_EQ_ver2000.so"
 
 echo "Desixtyfication complete"
