@@ -120,10 +120,10 @@ echo "Prepairing..."
 
 if [[ "$SOURCE_EXTRA_FIRMWARES" != "SM-S918"* ]]; then
     echo "Not a valid firmware to inherit"
-    exit 1
+    exit 0
 elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]]; then
     echo "This isn't an 64-bit only firmware"
-    exit 1
+    exit 0
 fi
 
 IFS=':' read -a SOURCE_EXTRA_FIRMWARES <<< "$SOURCE_EXTRA_FIRMWARES"
@@ -219,5 +219,11 @@ ADD_TO_WORK_DIR "system" "system/priv-app/SamsungDeviceHealthManagerService/Sams
 
 echo "Removing 32-Bit flags"
 SET_PROP "ro.zygote" "zygote64" "$WORK_DIR/vendor/default.prop"
+
+echo "Removing EUICC MEP"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/etc/permissions/privapp-permissions-com.samsung.euicc.mep.xml"
+
+echo "Adjust Dynamic IMEI"
+SET_PROP "ril.support.dynamic_imei" "true" "$WORK_DIR/vendor/default.prop"
 
 echo "Desixtyfication complete"
