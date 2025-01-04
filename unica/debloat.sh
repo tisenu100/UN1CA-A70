@@ -111,6 +111,9 @@ system/app/SamsungTTSVoice_pt_BR_f00/oat
 system/app/SamsungTTSVoice_ru_RU_f00/oat
 system/app/SamsungTTSVoice_th_TH_f00/oat
 system/app/SamsungTTSVoice_vi_VN_f00/oat
+system/app/SamsungTTSVoice_zh_TW_f00/oat
+system/app/SamsungTTSVoice_zh_CN_l02/oat
+system/app/SamsungTTSVoice_zh_HK_f00/oat
 system/app/SamsungWeather/oat
 system/app/SecHTMLViewer/oat
 system/app/SetupWizardLegalProvider/oat
@@ -239,6 +242,7 @@ system/priv-app/NSFusedLocation_v6.0/oat
 system/priv-app/OdaService/oat
 system/priv-app/OmaCP/oat
 system/priv-app/OMCAgent5/oat
+system/priv-app/OfflineLanguageModel_stub/oat
 system/priv-app/OneDrive_Samsung_v3/oat
 system/priv-app/PaymentFramework/oat
 system/priv-app/PeopleStripe/oat
@@ -288,6 +292,7 @@ system/priv-app/SOAgent7/oat
 system/priv-app/SohService/oat
 system/priv-app/SoundAlive_U2/oat
 system/priv-app/SPPPushClient/oat
+system/priv-app/SpriteWallpaper/oat
 system/priv-app/SsuService/oat
 system/priv-app/StickerFaceARAvatar/oat
 system/priv-app/StoryService/oat
@@ -389,6 +394,9 @@ system/app/SamsungTTSVoice_pt_BR_f00
 system/app/SamsungTTSVoice_ru_RU_f00
 system/app/SamsungTTSVoice_th_TH_f00
 system/app/SamsungTTSVoice_vi_VN_f00
+system/app/SamsungTTSVoice_zh_TW_f00
+system/app/SamsungTTSVoice_zh_CN_l02
+system/app/SamsungTTSVoice_zh_HK_f00
 system/app/SilentLog
 system/app/SmartReminder
 system/app/WebManual
@@ -436,6 +444,8 @@ system/priv-app/FacAtFunction
 system/priv-app/FactoryTestProvider
 system/priv-app/FotaAgent
 system/priv-app/GameHome
+system/priv-app/IfaaManagerServiceImpl
+system/priv-app/LLMPolicyService
 system/priv-app/ModemServiceMode
 system/priv-app/OneDrive_Samsung_v3
 system/priv-app/PaymentFramework
@@ -446,6 +456,8 @@ system/priv-app/SamsungCarKeyFw
 system/priv-app/SamsungPass
 system/priv-app/SecFactoryPhoneTest
 system/priv-app/SmartEpdgTestApp
+system/priv-app/SwiftKeyIme
+system/priv-app/SwiftkeySetting
 system/priv-app/Upday
 "
 

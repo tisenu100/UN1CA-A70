@@ -118,7 +118,7 @@ SET_PROP()
 
 echo "Prepairing..."
 
-if [[ "$SOURCE_EXTRA_FIRMWARES" != "SM-S918"* ]]; then
+if [[ "$SOURCE_EXTRA_FIRMWARES" != "SM-S911"* ]]; then
     echo "Not a valid firmware to inherit"
     exit 0
 elif [[ "$TARGET_SINGLE_SYSTEM_IMAGE" != "qssi_64" ]]; then
@@ -225,9 +225,5 @@ REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/etc/permissions/privapp-permission
 
 echo "Adjust Dynamic IMEI"
 SET_PROP "ril.support.dynamic_imei" "true" "$WORK_DIR/system/system/build.prop"
-
-echo "Remove SoundBoosterEQ"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libsoundboostereq_legacy.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/lib_SAG_EQ_ver2000.so"
 
 echo "Desixtyfication complete"

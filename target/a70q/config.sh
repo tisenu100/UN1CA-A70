@@ -16,11 +16,13 @@
 #
 
 # Device configuration file for Galaxy A70 (a70q)
+# Tip: TARGET_API_LEVEL is set to Tiramisu so it applies any patch that
+# wouldn't fit the Galaxy A52 but certainly would fit the Galaxy A70
 TARGET_NAME="Galaxy A70"
 TARGET_CODENAME="a70q"
 TARGET_FIRMWARE="SM-A525F/EUX/350281371234560"
 TARGET_EXTRA_FIRMWARES=()
-TARGET_API_LEVEL=34
+TARGET_API_LEVEL=33
 TARGET_PRODUCT_FIRST_API_LEVEL=30
 TARGET_VNDK_VERSION=30
 TARGET_SINGLE_SYSTEM_IMAGE="qssi_64"

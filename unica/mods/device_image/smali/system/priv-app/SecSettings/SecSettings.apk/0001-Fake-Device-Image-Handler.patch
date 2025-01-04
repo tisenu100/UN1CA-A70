@@ -16,7 +16,7 @@ index 2ceee56f..5a966bd8 100644
 -    invoke-static {v0}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
 -
 -    move-result-object v0
-+    const-string/jumbo v0, "SM-S928BZTGEUE"
++    const-string/jumbo v0, "SM-S9210ZKYTGY"
  
      new-instance v2, Ljava/lang/StringBuilder;
  
