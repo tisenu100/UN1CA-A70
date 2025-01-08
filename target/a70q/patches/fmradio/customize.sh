@@ -76,7 +76,7 @@ done
 
 CONTEXTS_LIST="
 system/etc/permissions/privapp-permissions-com.sec.android.app.fm.xml
-system/etc/permissions/privapp-permissions-com.samsung.android.fmm.xml
+system/etc/sysconfig/preinstalled-packages-com.sec.android.app.fm.xml
 "
 for context in $CONTEXTS_LIST
 do
