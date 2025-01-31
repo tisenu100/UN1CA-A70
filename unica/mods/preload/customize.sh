@@ -3,7 +3,7 @@ SKIPUNZIP=1
 # [
 GET_GALAXY_STORE_DOWNLOAD_URL()
 {
-    echo "$(curl -L -s "https://vas.samsungapps.com/stub/stubDownload.as?appId=$1&deviceId=SM-S911B&mcc=262&mnc=01&csc=EUX&sdkVer=34&extuk=0191d6627f38685f&pd=0" \
+    echo "$(curl -L -s "https://vas.samsungapps.com/stub/stubDownload.as?appId=$1&deviceId=SM-S9210&mcc=230&mnc=03&csc=TGY&sdkVer=34&extuk=a59839d085b95518&pd=0" \
         | grep 'downloadURI' | cut -d ">" -f 2 | sed -e 's/<!\[CDATA\[//g; s/\]\]//g')"
 }
 
@@ -18,16 +18,15 @@ DOWNLOAD_APK()
 }
 # ]
 
-# Patched GoodLock Manager @corsicanu
-# https://github.com/corsicanu/goodlock_dump
-DOWNLOAD_APK "https://github.com/corsicanu/goodlock_dump/raw/main/GoodLock_patched.apk" \
-    "GoodLock/GoodLock.apk"
-
-# Samsung Internet Browser
-# https://play.google.com/store/apps/details?id=com.sec.android.app.sbrowser
 if [[ "$TARGET_CODENAME" != "a71" ]]; then
     DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.sbrowser")" \
         "SBrowser/SBrowser.apk"
+    DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.popupcalculator")" \
+        "Calculator/Calculator.apk"
+    DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.samsung.android.calendar")" \
+        "Calender/Calendar.apk"
+    DOWNLOAD_APK "$(GET_GALAXY_STORE_DOWNLOAD_URL "com.sec.android.app.clockpackage")" \
+        "Clock/Clock.apk"
 fi
 
 sed -i "/system\/preload/d" "$WORK_DIR/configs/fs_config-system" \
