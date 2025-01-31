@@ -95,13 +95,18 @@ REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib/libtlc_blockchain_comm.so"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib/libtlc_blockchain_keystore.so"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib/libtlc_blockchain_direct_comm.so"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib/vendor.samsung.hardware.tlc.blockchain@1.0.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/hidl_tlc_blockchain_comm_client.so"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libdualdar.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libtlc_blockchain_comm.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libtlc_blockchain_keystore.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libtlc_blockchain_direct_comm.so"
-REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/vendor.samsung.hardware.tlc.blockchain@1.0.so"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/priv-app/HdmApk"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/priv-app/KnoxAIFrameworkApp"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/priv-app/KnoxGuard"
 REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/priv-app/KnoxZtFramework"
+
+if [ $TARGET_SINGLE_SYSTEM_IMAGE != "qssi_64" ]; then
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libtlc_blockchain_comm.so"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libtlc_blockchain_keystore.so"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/libtlc_blockchain_direct_comm.so"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/vendor.samsung.hardware.tlc.blockchain@1.0.so"
+REMOVE_FROM_WORK_DIR "$WORK_DIR/system/system/lib64/hidl_tlc_blockchain_comm_client.so"
+
+cp $SRC_DIR/unica/patches/deknox/qssi/libandroid_servers.so $WORK_DIR/system/system/lib64
+fi
