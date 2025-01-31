@@ -1,5 +1,10 @@
 SKIPUNZIP=1
 
+if [[ "$TARGET_CODENAME" == "a70q" ]]; then
+    echo "Target doesn't have a product overlay"
+    exit 0
+fi
+
 if [[ -d "$SRC_DIR/target/$TARGET_CODENAME/overlay" ]]; then
     bash -e "$SRC_DIR/scripts/apktool.sh" d -f "/product/overlay/framework-res__auto_generated_rro_product.apk"
 
