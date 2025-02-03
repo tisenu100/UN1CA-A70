@@ -397,7 +397,6 @@ system/etc/permissions/privapp-permissions-com.microsoft.skydrive.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.app.kfa.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.authfw.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.carkey.xml
-system/etc/permissions/privapp-permissions-com.samsung.android.cidmanager.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.dkey.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.game.gamehome.xml
 system/etc/permissions/privapp-permissions-com.samsung.android.providers.factory.xml
@@ -424,7 +423,6 @@ system/lib64/librildump_jni.so
 system/preload
 system/priv-app/AuthFramework
 system/priv-app/BCService
-system/priv-app/CIDManager
 system/priv-app/DeviceKeystring
 system/priv-app/DiagMonAgent91
 system/priv-app/DigitalKey
