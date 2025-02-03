@@ -31,7 +31,7 @@ etc/dpolicy
 # Samsung SIM Unlock
 SYSTEM_DEBLOAT+="
 system/bin/ssud
-system/etc/init/ssu_dm1qxxx.rc
+system/etc/init/ssu_e1qxxx.rc
 system/etc/init/ssu.rc
 system/etc/permissions/privapp-permissions-com.samsung.ssu.xml
 system/etc/sysconfig/samsungsimunlock.xml
@@ -111,6 +111,9 @@ system/app/SamsungTTSVoice_pt_BR_f00/oat
 system/app/SamsungTTSVoice_ru_RU_f00/oat
 system/app/SamsungTTSVoice_th_TH_f00/oat
 system/app/SamsungTTSVoice_vi_VN_f00/oat
+system/app/SamsungTTSVoice_zh_TW_f00/oat
+system/app/SamsungTTSVoice_zh_CN_l02/oat
+system/app/SamsungTTSVoice_zh_HK_f00/oat
 system/app/SamsungWeather/oat
 system/app/SecHTMLViewer/oat
 system/app/SetupWizardLegalProvider/oat
@@ -239,6 +242,7 @@ system/priv-app/NSFusedLocation_v6.0/oat
 system/priv-app/OdaService/oat
 system/priv-app/OmaCP/oat
 system/priv-app/OMCAgent5/oat
+system/priv-app/OfflineLanguageModel_stub/oat
 system/priv-app/OneDrive_Samsung_v3/oat
 system/priv-app/PaymentFramework/oat
 system/priv-app/PeopleStripe/oat
@@ -246,6 +250,7 @@ system/priv-app/PeripheralFramework/oat
 system/priv-app/PetService/oat
 system/priv-app/PhoneErrService/oat
 system/priv-app/PhotoRemasterService/oat
+system/priv-app/QMDService/oat
 system/priv-app/Quickboard/oat
 system/priv-app/Routines/oat
 system/priv-app/SamsungBilling/oat
@@ -287,11 +292,14 @@ system/priv-app/SOAgent7/oat
 system/priv-app/SohService/oat
 system/priv-app/SoundAlive_U2/oat
 system/priv-app/SPPPushClient/oat
+system/priv-app/SpriteWallpaper/oat
 system/priv-app/SsuService/oat
 system/priv-app/StickerFaceARAvatar/oat
 system/priv-app/StoryService/oat
 system/priv-app/SumeNNService/oat
 system/priv-app/SVCAgent/oat
+system/priv-app/SwiftKeyIme/oat
+system/priv-app/SwiftkeySetting/oat
 system/priv-app/Tag/oat
 system/priv-app/TalkbackSE/oat
 system/priv-app/TaskEdgePanel_v3.2/oat
@@ -315,7 +323,7 @@ priv-app/SetupWizard/oat
 "
 PRODUCT_DEBLOAT+="
 app/AssistantShell/oat
-app/Chrome/oat
+app/Chrome64/oat
 app/DuoStub/oat
 app/Gmail2/oat
 app/GoogleCalendarSyncAdapter/oat
@@ -352,7 +360,7 @@ etc/init/vendor_flash_recovery.rc
 # Apps debloat
 PRODUCT_DEBLOAT+="
 app/AssistantShell
-app/Chrome
+app/Chrome64
 app/DuoStub
 app/Gmail2
 app/Maps
@@ -387,6 +395,9 @@ system/app/SamsungTTSVoice_pt_BR_f00
 system/app/SamsungTTSVoice_ru_RU_f00
 system/app/SamsungTTSVoice_th_TH_f00
 system/app/SamsungTTSVoice_vi_VN_f00
+system/app/SamsungTTSVoice_zh_TW_f00
+system/app/SamsungTTSVoice_zh_CN_l02
+system/app/SamsungTTSVoice_zh_HK_f00
 system/app/SilentLog
 system/app/SmartReminder
 system/app/WebManual
@@ -432,14 +443,19 @@ system/priv-app/FacAtFunction
 system/priv-app/FactoryTestProvider
 system/priv-app/FotaAgent
 system/priv-app/GameHome
+system/priv-app/IfaaManagerServiceImpl
+system/priv-app/LLMPolicyService
 system/priv-app/ModemServiceMode
 system/priv-app/OneDrive_Samsung_v3
 system/priv-app/PaymentFramework
+system/priv-app/QMDService
 system/priv-app/SEMFactoryApp
 system/priv-app/SOAgent7
 system/priv-app/SamsungCarKeyFw
 system/priv-app/SamsungPass
 system/priv-app/SmartEpdgTestApp
+system/priv-app/SwiftKeyIme
+system/priv-app/SwiftkeySetting
 system/priv-app/Upday
 "
 
