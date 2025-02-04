@@ -63,18 +63,18 @@ case "$1" in
         ;;
     "unica/patches/product_feature/resolution")
         MODULE="$1"
-        FW="SM-S918B/BTE/350196551234562"
+        FW="SM-S918B/EUX/350196551234562"
         BLOBS="$(find "$SRC_DIR/unica/patches/product_feature/resolution/system" -type f \
             | sed "s.$SRC_DIR/unica/patches/product_feature/resolution.system.")"
         ;;
     "unica/patches/ultra")
         MODULE="$1"
-        FW="SM-S918B/BTE/350196551234562"
+        FW="SM-S918B/EUX/350196551234562"
         BLOBS="$(find "$SRC_DIR/unica/patches/ultra/system" -type f | sed "s.$SRC_DIR/unica/patches/ultra.system.")"
         ;;
     "unica/patches/uwb")
         MODULE="$1"
-        FW="SM-S918B/BTE/350196551234562"
+        FW="SM-S918B/EUX/350196551234562"
         BLOBS="$(find "$SRC_DIR/unica/patches/uwb/system" -type f | sed "s.$SRC_DIR/unica/patches/uwb.system.")"
         BLOBS+="$(find "$SRC_DIR/unica/patches/uwb/system_ext" -type f -printf "\n%p" | sed "s.$SRC_DIR/unica/patches/uwb/..")"
         ;;
@@ -110,6 +110,21 @@ case "$1" in
             | sed "s.$SRC_DIR/target/a71/patches/stock_blobs.system.")"
         BLOBS+="$(find "$SRC_DIR/target/a71/patches/stock_blobs/system_ext" -type f -printf "\n%p" \
             | sed "s.$SRC_DIR/target/a71/patches/stock_blobs.system/system.")"
+        ;;
+    "target/dm1q/patches/china")
+        MODULE="$1"
+        FW="SM-S9110/TGY/RFCW2198XNF"
+        BLOBS="$(find "$SRC_DIR/target/dm1q/patches/china/vendor" -type f | sed "s.$SRC_DIR/target/dm1q/patches/china/..")"
+        ;;
+    "target/dm2q/patches/china")
+        MODULE="$1"
+        FW="SM-S9160/TGY/R5CW22FT58F"
+        BLOBS="$(find "$SRC_DIR/target/dm2q/patches/china/vendor" -type f | sed "s.$SRC_DIR/target/dm2q/patches/china/..")"
+        ;;
+    "target/dm3q/patches/china")
+        MODULE="$1"
+        FW="SM-S9180/TGY/R5CW613B3ME"
+        BLOBS="$(find "$SRC_DIR/target/dm3q/patches/china/vendor" -type f | sed "s.$SRC_DIR/target/dm3q/patches/china/..")"
         ;;
     "target/m52xq/patches/stock_blobs")
         MODULE="$1"
@@ -185,6 +200,6 @@ for i in $BLOBS; do
     fi
 done
 
-cp --preserve=all "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" "$SRC_DIR/$MODULE/.current"
+cp --preserve=all "$FW_DIR/${MODEL}_${REGION}/.extracted" "$SRC_DIR/$MODULE/.current"
 
 exit 0
