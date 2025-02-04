@@ -10,5 +10,3 @@ elif echo "$TWOFOUR_TARGETS" | grep -q -w "$TARGET_CODENAME"; then
 else
     echo "Unknown boot animation resolution for \"$TARGET_CODENAME\""
 fi
-
-cp -a --preserve=all "$SRC_DIR/unica/mods/bootanim/system/"* "$WORK_DIR/system/system"
