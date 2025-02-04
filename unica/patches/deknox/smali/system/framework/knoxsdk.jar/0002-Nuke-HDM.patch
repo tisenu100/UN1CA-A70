@@ -15,7 +15,7 @@ index 1d953f6..c4bb242 100644
  
      invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
  
--    const-string v0, "3.0 - 3DD"
+-    const-string v0, "2.0 - 1D"
 +    const/4 v0, 0x0
  
      return-object v0
