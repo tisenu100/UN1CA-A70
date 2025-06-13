@@ -21,5 +21,5 @@
 # ROM-specific prebuilt blobs
 prebuilts/bootable/deprecated-ota/updater binary
 prebuilts/*/*/*/** binary
-unica/mods/pif/system/bin/rezetprop binary
+unica/patches/rezetprop/system/bin/rezetprop binary
 
