@@ -4,6 +4,11 @@ MODEL_SPOOF="$(GET_PROP "ro.product.system.model")"
 echo "Rezetprop Setup"
 echo "Spoofed BL: "$BL_SPOOF
 echo "Spoofed Model: "$MODEL_SPOOF
+if [[ -v SOURCE_PRODUCT_CODE ]]; then
+    echo "Spoofed Product Code: "$SOURCE_PRODUCT_CODE
+else
+    echo "No referenced product code value was found in source"
+fi
 
 {
     echo "on property:service.bootanim.exit=1"
@@ -15,9 +20,10 @@ echo "Spoofed Model: "$MODEL_SPOOF
     echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n ro.boot.warranty_bit 0"
     echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n sys.oem_unlock_allowed 0"
     echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n gsm.version.baseband "$BL_SPOOF","$BL_SPOOF
-    echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n ril.product_code SM-A366BLVGEUE"
+    if [[ -v SOURCE_PRODUCT_CODE ]]; then
+        echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n ril.product_code "$SOURCE_PRODUCT_CODE
+    fi
     echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n ril.sw_ver "$BL_SPOOF
-    echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n vendor.ril.product_code SM-A366BLVGEUE"
     echo "    exec u:r:init:s0 root root -- /system/bin/rezetprop -n ro.boot.em.model "$MODEL_SPOOF
     echo ""
     echo "on property:sys.unica.vbmeta.digest=*"
