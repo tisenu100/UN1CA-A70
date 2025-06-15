@@ -1,0 +1,49 @@
+name: Build ROM
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Manual trigger from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Edit this with the space‑separated packages you need
+    env:
+      PACKAGES: ""
+
+    steps:
+      - name: Checkout this repository (for workflow files)
+        uses: actions/checkout@v3
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y $PACKAGES
+
+      - name: Clone UN1CA‑A70 source tree
+        run: |
+          git clone https://github.com/nookgit12/UN1CA-A70
+          cd UN1CA-A70
+          git submodule update --init --recursive
+
+      - name: Source build environment
+        run: |
+          cd UN1CA-A70
+          source buildenv.sh
+
+      - name: Build ROM
+        run: |
+          cd UN1CA-A70
+          run_cmd make_rom
+
+      - name: Upload generated ROM (optional)
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: UN1CA-A70-ROM
+          path: UN1CA-A70/out/**/*
