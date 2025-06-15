@@ -2,5 +2,4 @@
 ro.dalvik.vm.enable_uffd_gc=false
 
 # Remove duplicated props
-persist.bluetooth.samsung.a2dp_offload.cap=
 ro.frp.pst=

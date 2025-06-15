@@ -80,7 +80,8 @@ FTP="
 system/framework/ssrm.jar/smali/com/android/server/ssrm/Feature.smali
 "
 for f in $FTP; do
-sed -i "s/siop_a36xq_sm6475/ssrm_default/g" "$APKTOOL_DIR/$f"
+sed -i "s/dvfs_policy_default/dvfs_policy_sm6150_xx/g" "$APKTOOL_DIR/$f"
+sed -i "s/siop_a36xq_sm6475/siop_a70q_sm6150/g" "$APKTOOL_DIR/$f"
 done
 
 

@@ -1,12 +1,12 @@
-From fdd5e3f0389d20f6df3efef82c45507baad64b56 Mon Sep 17 00:00:00 2001
+From 8027708069929edefa7043d68815a5a9e25b1f2d Mon Sep 17 00:00:00 2001
 From: tisenu100 <tisenu100@github.com>
-Date: Fri Apr 11 16:47:56 2025 +0300
-Subject: [PATCH] Disable Virtual Vibration
+Date: Tue Jun 10 14:35:30 2025 +0300
+Subject: [PATCH] Audio Patch
 
 ---
 
 diff --git a/smali_classes4/com/samsung/android/settings/asbase/audio/SoundSettings$3.smali b/smali_classes4/com/samsung/android/settings/asbase/audio/SoundSettings$3.smali
-index 35824b9d..5c0755bf 100644
+index d0337eb0d..662813505 100644
 --- a/smali_classes4/com/samsung/android/settings/asbase/audio/SoundSettings$3.smali
 +++ b/smali_classes4/com/samsung/android/settings/asbase/audio/SoundSettings$3.smali
 @@ -168,13 +168,17 @@
@@ -31,8 +31,22 @@ index 35824b9d..5c0755bf 100644
  
      return-object p0
  .end method
+diff --git a/smali_classes4/com/samsung/android/settings/asbase/reset/ResetSoundSystemFeedbackSettings$1.smali b/smali_classes4/com/samsung/android/settings/asbase/reset/ResetSoundSystemFeedbackSettings$1.smali
+index affa6dcf7..ba0d6408f 100644
+--- a/smali_classes4/com/samsung/android/settings/asbase/reset/ResetSoundSystemFeedbackSettings$1.smali
++++ b/smali_classes4/com/samsung/android/settings/asbase/reset/ResetSoundSystemFeedbackSettings$1.smali
+@@ -350,9 +350,5 @@
+ 
+     invoke-static {p0, p1, v2}, Landroid/provider/Settings$System;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
+ 
+-    const-string/jumbo p1, "vibration_sound_enabled"
+-
+-    invoke-static {p0, p1, v2}, Landroid/provider/Settings$System;->putInt(Landroid/content/ContentResolver;Ljava/lang/String;I)Z
+-
+     return-void
+ .end method
 diff --git a/smali_classes4/com/samsung/android/settings/asbase/vibration/VirtualVibrationSoundPreferenceController.smali b/smali_classes4/com/samsung/android/settings/asbase/vibration/VirtualVibrationSoundPreferenceController.smali
-index ec6253da..a77db7ce 100644
+index f3d94d36d..1b564787e 100644
 --- a/smali_classes4/com/samsung/android/settings/asbase/vibration/VirtualVibrationSoundPreferenceController.smali
 +++ b/smali_classes4/com/samsung/android/settings/asbase/vibration/VirtualVibrationSoundPreferenceController.smali
 @@ -129,7 +129,7 @@
@@ -93,7 +107,7 @@ index ec6253da..a77db7ce 100644
  
      move-result-object p0
 diff --git a/smali_classes4/com/samsung/android/settings/eternal/provider/items/SoundItem.smali b/smali_classes4/com/samsung/android/settings/eternal/provider/items/SoundItem.smali
-index b00910cd..d1234cd7 100644
+index fa575589b..fbd711ec7 100644
 --- a/smali_classes4/com/samsung/android/settings/eternal/provider/items/SoundItem.smali
 +++ b/smali_classes4/com/samsung/android/settings/eternal/provider/items/SoundItem.smali
 @@ -1203,7 +1203,7 @@

@@ -58,6 +58,7 @@ GEN_CONFIG_FILE()
         else
             echo "SOURCE_EXTRA_FIRMWARES=\"\""
         fi
+        echo "SOURCE_PRODUCT_CODE=\"${SOURCE_PRODUCT_CODE:?}\""
         echo "TARGET_NAME=\"${TARGET_NAME:?}\""
         echo "TARGET_CODENAME=\"${TARGET_CODENAME:?}\""
         if [ "${#TARGET_ASSERT_MODEL[@]}" -ge 1 ]; then

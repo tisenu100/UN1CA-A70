@@ -1,12 +1,12 @@
-From 6438aeefb8303d26021f3495c4b7b6bd0b6033ab Mon Sep 17 00:00:00 2001
+From b2e78fed9063ccdfaf4b52d1ccd6092785d016d1 Mon Sep 17 00:00:00 2001
 From: tisenu100 <tisenu100@github.com>
-Date: Thu Apr 10 20:34:31 2025 +0300
+Date: Tue Jun 10 14:01:10 2025 +0300
 Subject: [PATCH] Audio Patch
 
 ---
 
 diff --git a/smali_classes5/com/samsung/android/audio/Rune.smali b/smali_classes5/com/samsung/android/audio/Rune.smali
-index 2a6d320e..a0e2a1ba 100644
+index 2a6d320e..c778df6a 100644
 --- a/smali_classes5/com/samsung/android/audio/Rune.smali
 +++ b/smali_classes5/com/samsung/android/audio/Rune.smali
 @@ -264,7 +264,7 @@
@@ -18,14 +18,406 @@ index 2a6d320e..a0e2a1ba 100644
  
  .field public static final blacklist SEC_AUDIO_SUPPORT_FACTORY_INTERPOSER:Z = false
  
-@@ -333,7 +333,7 @@
+@@ -278,7 +278,7 @@
+ 
+ .field public static final blacklist SEC_AUDIO_SUPPORT_SOUND_THEME:Z
+ 
+-.field public static final blacklist SEC_AUDIO_SUPPORT_VIRTUAL_VIBRATION_SOUND:Z = true
++.field public static final blacklist SEC_AUDIO_SUPPORT_VIRTUAL_VIBRATION_SOUND:Z = false
+ 
+ .field public static final blacklist SEC_AUDIO_SUPPORT_VOIP_ANTI_HOWLING:Z
+ 
+@@ -331,9 +331,9 @@
+ 
+ # direct methods
  .method static constructor blacklist <clinit>()V
-     .locals 8
+-    .locals 8
++    .locals 7
  
 -    const-string v0, "2"
 +    const-string v0, "1"
  
      invoke-static {v0}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
  
+@@ -607,261 +607,259 @@
+ 
+     sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_CPU_STATE_LOCK:Z
+ 
+-    const-string v0, "DSP;AFE"
++    invoke-virtual {v4, v4}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    invoke-virtual {v0, v4}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+-
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_KARAOKE_LISTENBACK:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_KARAOKE_LISTENBACK:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_CONFIG_REMOTE_MIC"
++    const-string v3, "SEC_FLOATING_FEATURE_AUDIO_CONFIG_REMOTE_MIC"
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v5, "NONE"
++    const-string v3, "NONE"
+ 
+-    invoke-virtual {v3, v5}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v0, v3}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    xor-int/2addr v3, v2
++    xor-int/2addr v0, v2
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_REMOTE_MIC:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_REMOTE_MIC:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_CONFIG_EFFECTS_VIDEOCALL"
++    const-string v3, "SEC_FLOATING_FEATURE_AUDIO_CONFIG_EFFECTS_VIDEOCALL"
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "3MIC"
++    const-string v5, "3MIC"
+ 
+-    invoke-virtual {v3, v6}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v0, v5}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VIDEO_CALL_VOICE_EFFECT:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VIDEO_CALL_VOICE_EFFECT:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "SEC_FLOATING_FEATURE_AUDIO_CONFIG_VOLUMEMONITOR_STAGE"
++    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_CONFIG_VOLUMEMONITOR_STAGE"
+ 
+-    invoke-virtual {v3, v6}, Lcom/samsung/android/feature/SemFloatingFeature;->getInteger(Ljava/lang/String;)I
++    invoke-virtual {v0, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getInteger(Ljava/lang/String;)I
+ 
+-    move-result v3
++    move-result v0
+ 
+-    const/4 v7, 0x3
++    const/4 v6, 0x3
+ 
+-    if-lt v3, v7, :cond_6
++    if-lt v0, v6, :cond_6
+ 
+-    move v3, v2
++    move v0, v2
+ 
+     goto :goto_6
+ 
+     :cond_6
+-    move v3, v1
++    move v0, v1
+ 
+     :goto_6
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VOLUME_MONITOR_PHASE_3:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VOLUME_MONITOR_PHASE_3:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v7, "2MIC"
++    const-string v6, "2MIC"
+ 
+-    invoke-virtual {v3, v7}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v0, v6}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_CALL_MONSTER_SOUND:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_CALL_MONSTER_SOUND:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    invoke-virtual {v3, v6}, Lcom/samsung/android/feature/SemFloatingFeature;->getInteger(Ljava/lang/String;)I
++    invoke-virtual {v0, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getInteger(Ljava/lang/String;)I
+ 
+-    move-result v3
++    move-result v0
+ 
+-    const/4 v6, 0x2
++    const/4 v5, 0x2
+ 
+-    if-lt v3, v6, :cond_7
++    if-lt v0, v5, :cond_7
+ 
+-    move v3, v2
++    move v0, v2
+ 
+     goto :goto_7
+ 
+     :cond_7
+-    move v3, v1
++    move v0, v1
+ 
+     :goto_7
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_BT_VOLUME_MONITOR:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_BT_VOLUME_MONITOR:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_VOICE_TX_FOR_INCALL_MUSIC"
++    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_VOICE_TX_FOR_INCALL_MUSIC"
+ 
+-    invoke-virtual {v3, v6}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_SCREEN_CALL:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_SCREEN_CALL:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_VOIP_SOUND_LOUDER"
++    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_VOIP_SOUND_LOUDER"
+ 
+-    invoke-virtual {v3, v6}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_SUPPORT_VOIP_SOUND_LOUDER:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_SUPPORT_VOIP_SOUND_LOUDER:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_ANTI_HOWLING"
++    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_ANTI_HOWLING"
+ 
+-    invoke-virtual {v3, v6}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_SUPPORT_VOIP_ANTI_HOWLING:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_SUPPORT_VOIP_ANTI_HOWLING:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "DEFAULT"
++    const-string v5, "DEFAULT"
+ 
+-    invoke-virtual {v3, v6}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v0, v5}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VIDEO_CALL_VOICE_DEFAULT_EFFECT:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VIDEO_CALL_VOICE_DEFAULT_EFFECT:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v6, "None"
++    const-string v5, "None"
+ 
+-    invoke-virtual {v3, v6}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v0, v5}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    if-eqz v3, :cond_9
++    if-eqz v0, :cond_9
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v7, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_MICMODE_QUICK_PANEL"
++    const-string v6, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_MICMODE_QUICK_PANEL"
+ 
+-    invoke-virtual {v3, v7}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v6}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    if-nez v3, :cond_9
++    if-nez v0, :cond_9
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemCscFeature;->getInstance()Lcom/samsung/android/feature/SemCscFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemCscFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemCscFeature;->getString(Ljava/lang/String;)Ljava/lang/String;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    invoke-virtual {v3, v6}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v0, v5}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    if-nez v3, :cond_8
++    if-nez v0, :cond_8
+ 
+     goto :goto_8
+ 
+     :cond_8
+-    move v3, v1
++    move v0, v1
+ 
+     goto :goto_9
+ 
+     :cond_9
+     :goto_8
+-    move v3, v2
++    move v0, v2
+ 
+     :goto_9
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_MIC_MODE_FOR_QUICK_PANEL_UI:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_MIC_MODE_FOR_QUICK_PANEL_UI:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v5, "SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI"
++    const-string v3, "SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI"
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    xor-int/2addr v3, v2
++    xor-int/2addr v0, v2
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VOIP_LIVE_TRANSLATE:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_VOIP_LIVE_TRANSLATE:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v5, "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_PERSONALIZED_DATA_CORE"
++    const-string v3, "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_PERSONALIZED_DATA_CORE"
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    sput-boolean v3, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_MEDIA_SESSION_AI:Z
++    sput-boolean v0, Lcom/samsung/android/audio/Rune;->SEC_AUDIO_MEDIA_SESSION_AI:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+ 
+-    move-result-object v3
++    move-result-object v0
+ 
+-    const-string v5, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_SPEAKER_AEC"
++    const-string v3, "SEC_FLOATING_FEATURE_AUDIO_SUPPORT_SPEAKER_AEC"
+ 
+-    invoke-virtual {v3, v5}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
++    invoke-virtual {v0, v3}, Lcom/samsung/android/feature/SemFloatingFeature;->getBoolean(Ljava/lang/String;)Z
+ 
+-    move-result v3
++    move-result v0
+ 
+-    if-nez v3, :cond_b
++    if-nez v0, :cond_b
+ 
+-    invoke-virtual {v0, v4}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
++    invoke-virtual {v4, v4}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
+ 
+     move-result v0
+ 
+diff --git a/smali_classes6/com/samsung/android/vibrator/VibRune.smali b/smali_classes6/com/samsung/android/vibrator/VibRune.smali
+index 9bfc42ad..facd9598 100644
+--- a/smali_classes6/com/samsung/android/vibrator/VibRune.smali
++++ b/smali_classes6/com/samsung/android/vibrator/VibRune.smali
+@@ -60,7 +60,7 @@
+ 
+ .field public static final blacklist SUPPORT_VIBRATION_TAG:Z = true
+ 
+-.field public static final blacklist SUPPORT_VIRTUAL_VIBRATION_SOUND:Z = true
++.field public static final blacklist SUPPORT_VIRTUAL_VIBRATION_SOUND:Z = false
+ 
+ .field private static blacklist mIsHapticEngineIndexSupported:Z
+ 
 -- 
 2.48.1
+
