@@ -17,10 +17,6 @@ jobs:
 
     env:
       TARGET_DEVICE: ${{ matrix.target }}
-      APT_PACKAGES: >-
-        attr ccache clang ffmpeg golang
-        libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev
-        libzstd-dev linux-modules-extra-$(uname -r) lld protobuf-compiler webp
 
     steps:
       - name: Checkout repository
@@ -45,10 +41,13 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          echo "$APT_PACKAGES" | tr ' ' '\n' > .github/apt-packages.txt
           sudo apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y $(cat .github/apt-packages.txt)
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+          attr ccache clang ffmpeg golang \
+          libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev \
+          libzstd-dev linux-modules-extra-$(uname -r) lld protobuf-compiler webp
           sudo modprobe erofs f2fs
+
 
       - name: Configure Git identity
         run: |
