@@ -1,49 +1,101 @@
-name: Build ROM
+name: Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [fifteen]
   pull_request:
-    branches: [ main ]
-  # Manual trigger from the Actions tab
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
-    # Edit this with the space‑separated packages you need
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [a70q]
+
     env:
-      PACKAGES: ""
+      TARGET_DEVICE: ${{ matrix.target }}
+      APT_PACKAGES: >-
+        attr ccache clang ffmpeg golang
+        libbrotli-dev libgtest-dev libprotobuf-dev libunwind-dev libpcre2-dev
+        libzstd-dev linux-modules-extra-$(uname -r) lld protobuf-compiler webp
 
     steps:
-      - name: Checkout this repository (for workflow files)
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Free disk space early
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo docker system prune -af
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Cache APT packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: ${{ runner.os }}-apt-${{ hashFiles('.github/apt-packages.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
 
       - name: Install build dependencies
         run: |
+          echo "$APT_PACKAGES" | tr ' ' '\n' > .github/apt-packages.txt
           sudo apt-get update
-          sudo apt-get install -y $PACKAGES
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y $(cat .github/apt-packages.txt)
+          sudo modprobe erofs f2fs
 
-      - name: Clone UN1CA‑A70 source tree
+      - name: Configure Git identity
         run: |
-          git clone https://github.com/nookgit12/UN1CA-A70
-          cd UN1CA-A70
-          git submodule update --init --recursive
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Source build environment
+      - name: Import platform signing keys
+        env:
+          PLATFORM_KEY_PK8: ${{ secrets.PLATFORM_KEY_PK8 }}
+          PLATFORM_KEY_PEM: ${{ secrets.PLATFORM_KEY_PEM }}
         run: |
-          cd UN1CA-A70
-          source buildenv.sh
+          mkdir -p security
+          echo -n "$PLATFORM_KEY_PK8" | base64 --decode > security/unica_platform.pk8
+          echo -n "$PLATFORM_KEY_PEM" | base64 --decode > security/unica_platform.x509.pem
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: gradle
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache ccache objects
+        uses: actions/cache@v4
+        with:
+          path: ~/.ccache
+          key: ${{ runner.os }}-ccache-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-ccache-
+
+      - name: Prepare build environment
+        run: |
+          source ./buildenv.sh
 
       - name: Build ROM
         run: |
-          cd UN1CA-A70
+          source ./buildenv.sh
           run_cmd make_rom
 
-      - name: Upload generated ROM (optional)
+      - name: Upload ROM artifacts
         if: success()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: UN1CA-A70-ROM
-          path: UN1CA-A70/out/**/*
+          name: ROM-${{ matrix.target }}
+          path: out/
