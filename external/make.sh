@@ -136,9 +136,8 @@ ANDROID_TOOLS=true
 APKTOOL=true
 EROFS_UTILS=true
 IMG2SDAT=true
-SAMFIRM=true
+SAMLOADER=true
 SIGNAPK=true
-SMALI=true
 
 ANDROID_TOOLS_EXEC=(
     "adb" "append2simg" "avbtool" "e2fsdroid"
@@ -161,18 +160,14 @@ IMG2SDAT_EXEC=(
     "blockimgdiff.py" "common.py" "images.py" "img2sdat" "rangelib.py" "sparse_img.py"
 )
 CHECK_TOOLS "${IMG2SDAT_EXEC[@]}" && IMG2SDAT=false
-SAMFIRM_EXEC=(
-    "samfirm"
+SAMLOADER_EXEC=(
+    "../venv/bin/samloader"
 )
-CHECK_TOOLS "${SAMFIRM_EXEC[@]}" && SAMFIRM=false
+CHECK_TOOLS "${SAMLOADER_EXEC[@]}" && SAMLOADER=false
 SIGNAPK_EXEC=(
     "signapk" "signapk.jar"
 )
 CHECK_TOOLS "${SIGNAPK_EXEC[@]}" && SIGNAPK=false
-SMALI_EXEC=(
-    "android-smali.jar" "baksmali" "smali" "smali-baksmali.jar"
-)
-CHECK_TOOLS "${SMALI_EXEC[@]}" && SMALI=false
 
 if $ANDROID_TOOLS; then
     ANDROID_TOOLS_CMDS=(
@@ -199,7 +194,6 @@ fi
 if $APKTOOL; then
     APKTOOL_CMDS=(
         "git reset --hard"
-        "git apply \"$SRC_DIR/external/patches/apktool/0001-feat-support-aapt-optimization.patch\""
         "./gradlew build shadowJar"
         "cp -a \"scripts/linux/apktool\" \"$TOOLS_DIR\""
         "cp -a \"brut.apktool/apktool-cli/build/libs/apktool-cli.jar\" \"$TOOLS_DIR/apktool.jar\""
@@ -223,14 +217,13 @@ if $IMG2SDAT; then
 
     BUILD "img2sdat" "$SRC_DIR/external/img2sdat" "${IMG2SDAT_CMDS[@]}"
 fi
-if $SAMFIRM; then
-    SAMFIRM_CMDS=(
-        "npm install"
-        "npm run build"
-        "cp -a \"dist/index.js\" \"$TOOLS_DIR/samfirm\""
+if $SAMLOADER; then
+    SAMLOADER_CMDS=(
+        "python3 -m venv \"$TOOLS_DIR/venv\""
+        "source \"$TOOLS_DIR/venv/bin/activate\"; pip3 install ."
     )
 
-    BUILD "samfirm.js" "$SRC_DIR/external/samfirm.js" "${SAMFIRM_CMDS[@]}"
+    BUILD "samloader" "$SRC_DIR/external/samloader" "${SAMLOADER_CMDS[@]}"
 fi
 if $SIGNAPK; then
     SIGNAPK_CMDS=(
@@ -240,17 +233,6 @@ if $SIGNAPK; then
     )
 
     BUILD "signapk" "$SRC_DIR/external/signapk" "${SIGNAPK_CMDS[@]}"
-fi
-if $SMALI; then
-    SMALI_CMDS=(
-        "./gradlew assemble baksmali:fatJar smali:fatJar"
-        "cp -a \"scripts/baksmali\" \"$TOOLS_DIR\""
-        "cp -a \"scripts/smali\" \"$TOOLS_DIR\""
-        "cp -a \"baksmali/build/libs/\"*-dev-fat.jar \"$TOOLS_DIR/smali-baksmali.jar\""
-        "cp -a \"smali/build/libs/\"*-dev-fat.jar \"$TOOLS_DIR/android-smali.jar\""
-    )
-
-    BUILD "baksmali/smali" "$SRC_DIR/external/smali" "${SMALI_CMDS[@]}"
 fi
 
 exit 0
