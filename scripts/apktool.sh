@@ -49,42 +49,6 @@ REMOVE_FROM_WORK_DIR()
     fi
 }
 
-DEX_TO_API()
-{
-    local DEX_FILE="$1"
-    local API
-    local DEX_VERSION
-
-    DEX_VERSION="$(xxd -p -l "1" --skip "6" "$DEX_FILE")"
-
-    case "$DEX_VERSION" in
-        "35")
-            API="23"
-            ;;
-        "37")
-            API="25"
-            ;;
-        "38")
-            API="27"
-            ;;
-        "39")
-            API="29"
-            ;;
-        "40")
-            API="34"
-            ;;
-        "41")
-            API="36"
-            ;;
-        *)
-            echo "Unknown DEX format version ($DEX_VERSION). Aborting"
-            exit 1
-            ;;
-    esac
-
-    echo "$API"
-}
-
 DO_DECOMPILE()
 {
     local OUT_DIR="$1"
@@ -135,37 +99,7 @@ DO_DECOMPILE()
     fi
 
     echo "Decompiling $OUT_DIR"
-    apktool -q d -b $FORCE -o "$APKTOOL_DIR$OUT_DIR" -p "$FRAMEWORK_DIR" -r -s "$APK_PATH"
-
-    # Since Android 16 all class files are stored within containers. Use a hacky trick to decontain them out
-    if [[ "$APK_PATH" == *"services.jar" ]]; then
-	echo "Decontaining services.jar"
-        baksmali d -a 29 "$APK_PATH/classes.dex" --ac false --di false --sl -l -o "$APKTOOL_DIR$OUT_DIR/smali"
-        baksmali d -a 29 "$APK_PATH/classes.dex/2" --ac false --di false --sl -l -o "$APKTOOL_DIR$OUT_DIR/smali_classes2"
-	rm "$APKTOOL_DIR$OUT_DIR/classes.dex"
-    else
-        for f in "$APKTOOL_DIR$OUT_DIR/"*.dex
-        do
-            DEX_API_LEVEL="$(DEX_TO_API "$f")"
-           echo -n "$DEX_API_LEVEL" > "$APKTOOL_DIR$OUT_DIR/../dex_api_version"
-
-            if [[ "$f" == *"classes.dex" ]]; then
-                SMALI_OUT="smali"
-            else
-                SMALI_OUT="smali_$(basename "${f//.dex/}")"
-            fi
-
-            baksmali d -a "$DEX_API_LEVEL" --ac false --di false -l -o "$APKTOOL_DIR$OUT_DIR/$SMALI_OUT" --sl "$f"
-            rm "$f"
-        done
-    fi
-
-    # Workaround for U framework.jar
-    if [[ "$APK_PATH" == *"framework.jar" ]]; then
-        if unzip -l "$APK_PATH" | grep -q "debian.mime.types"; then
-            unzip -q "$APK_PATH" "res/*" -d "$APKTOOL_DIR$OUT_DIR/unknown"
-        fi
-    fi
+    apktool -q d --no-debug-info --no-res $FORCE -o "$APKTOOL_DIR$OUT_DIR" -p "$FRAMEWORK_DIR" -r -s "$APK_PATH"
 }
 
 DO_RECOMPILE()
@@ -218,27 +152,9 @@ DO_RECOMPILE()
 
     echo "Recompiling $IN_DIR"
 
-    for f in "$APKTOOL_DIR$IN_DIR/"*
-    do
-        [[ "$f" != *"smali"* ]] && continue
-
-        if [[ "$f" == *"smali" ]]; then
-            DEX_FILENAME="classes.dex"
-        else
-            DEX_FILENAME="$(basename "${f/smali_//}").dex"
-        fi
-
-	if [[ $APK_NAME == "services.jar" ]]; then
-		smali a -a 29 -o "$APKTOOL_DIR$IN_DIR/$DEX_FILENAME" "$f"
-	else
-         	smali a -a "$(cat "$APKTOOL_DIR$IN_DIR/../dex_api_version")" -o "$APKTOOL_DIR$IN_DIR/$DEX_FILENAME" "$f"       	
-	fi
-    done
-
     mkdir -p "$APKTOOL_DIR$IN_DIR/build/apk"
     cp -a --preserve=all "$APKTOOL_DIR$IN_DIR/original/META-INF" "$APKTOOL_DIR$IN_DIR/build/apk/META-INF"
     apktool -q b -p "$FRAMEWORK_DIR" -srp "$APKTOOL_DIR$IN_DIR"
-    [[ -f "$APKTOOL_DIR$IN_DIR/classes.dex" ]] && rm "$APKTOOL_DIR$IN_DIR/"*.dex
 
     echo "Zipaligning $IN_DIR"
     zipalign -p 4 "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME" "$APKTOOL_DIR$IN_DIR/dist/temp" \

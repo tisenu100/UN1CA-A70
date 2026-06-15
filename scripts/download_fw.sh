@@ -33,7 +33,7 @@ DOWNLOAD_FIRMWARE()
     PDR="$(pwd)"
 
     cd "$ODIN_DIR"
-    { samloader -m "$MODEL" -r "$REGION" -i "$IMEI" -O "$ODIN_DIR/${MODEL}_${REGION}" > /dev/null; } 2>&1 \
+    { samloader -m "$MODEL" -r "$REGION" -i "$IMEI" download -O "$ODIN_DIR/${MODEL}_${REGION}" > /dev/null; } 2>&1 \
         && touch "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" \
         || exit 1
 
