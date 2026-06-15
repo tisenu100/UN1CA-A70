@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (C) 2023 Salvo Giangreco
+# Copyright (C) 2026 Salvo Giangreco
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,9 +33,14 @@ DOWNLOAD_FIRMWARE()
     PDR="$(pwd)"
 
     cd "$ODIN_DIR"
-    { samfirm -m "$MODEL" -r "$REGION" -i "$IMEI" > /dev/null; } 2>&1 \
+    { samloader -m "$MODEL" -r "$REGION" -i "$IMEI" -O "$ODIN_DIR/${MODEL}_${REGION}" > /dev/null; } 2>&1 \
         && touch "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" \
         || exit 1
+
+    ZIP_FILE="$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "*.zip" | sort -r | head -n 1)"
+    echo "Unpacking $(basename "$ZIP_FILE")"
+    unzip -o \"$ZIP_FILE\" -d \"$ODIN_DIR/${MODEL}_${REGION}\" && rm -rf \"$ZIP_FILE\" || exit 1
+
     [ -f "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" ] && {
         echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "AP*" -exec basename {} \; | cut -d "_" -f 2)/"
         echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CSC*" -exec basename {} \; | cut -d "_" -f 3)/"
