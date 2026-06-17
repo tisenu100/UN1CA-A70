@@ -1,0 +1,4 @@
+id=aosp_sign
+name=AOSP Signature Support
+author=Tisenu100
+description=Allows packages signed with AOSP Platform keys to be applied.

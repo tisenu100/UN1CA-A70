@@ -1,0 +1,66 @@
+From 5f5ac837aa99544085f5f8da2ed95fc415e1a0cf Mon Sep 17 00:00:00 2001
+From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
+Date: Wed, 17 Jun 2026 16:17:17 +0300
+Subject: [PATCH] Allow AOSP signed packages
+
+---
+ .../android/server/pm/ScanPackageUtils.smali  | 36 +++++++++++++++++--
+ 1 file changed, 34 insertions(+), 2 deletions(-)
+
+diff --git a/smali_classes2/com/android/server/pm/ScanPackageUtils.smali b/smali_classes2/com/android/server/pm/ScanPackageUtils.smali
+index fb5a301f..7b6077a4 100644
+--- a/smali_classes2/com/android/server/pm/ScanPackageUtils.smali
++++ b/smali_classes2/com/android/server/pm/ScanPackageUtils.smali
+@@ -369,7 +369,7 @@
+ 
+     if-nez p1, :cond_b
+ 
+-    if-eqz p2, :cond_c
++    if-eqz p2, :cond_fa
+ 
+     invoke-interface {p2}, Lcom/android/server/pm/pkg/AndroidPackage;->getSigningDetails()Landroid/content/pm/SigningDetails;
+ 
+@@ -383,7 +383,39 @@
+ 
+     move-result p1
+ 
+-    if-nez p1, :cond_c
++    if-nez p1, :cond_fa
++    goto :cond_b
++
++    :cond_fa
++    const/4 v3, 0x1
++
++    new-array v3, v3, [Landroid/content/pm/Signature;
++
++    new-instance v4, Landroid/content/pm/Signature;
++
++    const-string p1, "MIIEqDCCA5CgAwIBAgIJALOZgIbQVs/6MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMjQwNTBaFw0zNTA5MDEyMjQwNTBaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAJx4BZKsDV04HN6qZezIpgBuNkgMbXIHsSARvlCGOqvitV0Amt9xRtbyICKAx81Ne9smJDuKgGwms0sTdSOkkmgiSQTcAUk+fArPGgXIdPabA3tgMJ2QdNJCgOFrrSqHNDYZUer3KkgtCbIEsYdeEqyYwap3PWgAuer95W1Yvtjo2hb5o2AJnDeoNKbf7be2tEoEngeiafzPLFSW8s821k35CjuNjzSjuqtM9TNxqydxmzulh1StDFP8FOHbRdUeI0+76TybpO35zlQmE1DsU1YHv2mi/0qgfbX36iANCabBtJ4hQC+J7RGQiTqrWpGA8VLoL4WkV1PPX8GQccXuyCcCAQOjgfwwgfkwHQYDVR0OBBYEFE/koLPdnLop9x1yh8Tnw48ghsKZMIHJBgNVHSMEgcEwgb6AFE/koLPdnLop9x1yh8Tnw48ghsKZoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJALOZgIbQVs/6MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBAFclUbjZOh9z3g9tRp+G2tZwFAApPIigzXzXeLc9r8wZf6t25iEuVsHHYc/EL9cz3lLFCuCIFM78CjtaGkNGBU2Cnx2CtCsgSL+ItdFJKe+F9g7dEtctVWV+IuPoXQTIMdYT0Zk4u4mCJH+jISVroS0dao+S6h2xw3Mxe6DAN/DRr/ZFrvIkl5+6bnoUvAJccbmBOM7z3fwFlhfPJIRc97QNY4L3J17XOElatuWTG5QhdlxJG3L7aOCA29tYwgKdNHyLMozkPvaosVUz7fvpib1qSN1LIC7alMarjdW4OZID2q4u1EYjLk/pvZYTlMYwDlE448/Shebk5INTjLixs1c="
++
++    invoke-direct {v4, p1}, Landroid/content/pm/Signature;-><init>(Ljava/lang/String;)V
++
++    const/4 p1, 0x0
++
++    aput-object v4, v3, p1
++
++    invoke-interface {p0}, Lcom/android/internal/pm/parsing/pkg/ParsedPackage;->getSigningDetails()Landroid/content/pm/SigningDetails;
++
++    move-result-object v4
++
++    invoke-virtual {v4}, Landroid/content/pm/SigningDetails;->getSignatures()[Landroid/content/pm/Signature;
++
++    move-result-object v4
++
++    invoke-static {v4, v3}, Lcom/android/server/pm/PackageManagerServiceUtils;->compareSignatureArrays([Landroid/content/pm/Signature;[Landroid/content/pm/Signature;)I
++
++    move-result p1
++
++    if-nez p1, :cond_b
++
++    goto :cond_c
+ 
+     :cond_b
+     move v1, v2
+-- 
+2.43.0
+
