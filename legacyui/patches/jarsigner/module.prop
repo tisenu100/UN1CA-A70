@@ -1,4 +1,0 @@
-id=jarsigner
-name=JARSigner for APKs
-author=Tisenu100
-description=Lowers the application signature requirements to JARSigner status until a proper AOSP signature implementation is added.
