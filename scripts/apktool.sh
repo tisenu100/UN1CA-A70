@@ -99,7 +99,7 @@ DO_DECOMPILE()
     fi
 
     echo "Decompiling $OUT_DIR"
-    apktool -q d --no-debug-info --no-res $FORCE -o "$APKTOOL_DIR$OUT_DIR" -p "$FRAMEWORK_DIR" -r -s "$APK_PATH"
+    apktool -q d --no-debug-info --no-res $FORCE -o "$APKTOOL_DIR$OUT_DIR" -p "$FRAMEWORK_DIR" -s "$APK_PATH"
 }
 
 DO_RECOMPILE()
@@ -156,9 +156,16 @@ DO_RECOMPILE()
     cp -a --preserve=all "$APKTOOL_DIR$IN_DIR/original/META-INF" "$APKTOOL_DIR$IN_DIR/build/apk/META-INF"
     apktool -q b -p "$FRAMEWORK_DIR" -srp "$APKTOOL_DIR$IN_DIR"
 
-    echo "Zipaligning $IN_DIR"
-    zipalign -p 4 "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME" "$APKTOOL_DIR$IN_DIR/dist/temp" \
-        && mv -f "$APKTOOL_DIR$IN_DIR/dist/temp" "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME"
+    if [[ "$APK_PATH" == *".apk" ]]; then
+        echo "Signing $IN_DIR"
+        signapk "$SRC_DIR/security/aosp_platform.x509.pem" "$SRC_DIR/security/aosp_platform.pk8" \
+            "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME" "$APKTOOL_DIR$IN_DIR/dist/temp.apk" \
+            && mv -f "$APKTOOL_DIR$IN_DIR/dist/temp.apk" "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME"
+    else
+        echo "Zipaligning $IN_DIR"
+        zipalign -p 4 "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME" "$APKTOOL_DIR$IN_DIR/dist/temp" \
+            && mv -f "$APKTOOL_DIR$IN_DIR/dist/temp" "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME"
+    fi
 
     mv -f "$APKTOOL_DIR$IN_DIR/dist/$APK_NAME" "$APK_PATH"
     rm -rf "$APKTOOL_DIR$IN_DIR/build" && rm -rf "$APKTOOL_DIR$IN_DIR/dist"
