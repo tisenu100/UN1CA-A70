@@ -75,7 +75,7 @@ if $BUILD_ROM; then
 
     echo -e "\n- Applying ROM patches..."
     bash "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/legacyui/patches"
-    [[ -d "$SRC_DIR/target/$TARGET_CODENAME/patches" ]] \
+    [[ -d "$SRC_DIR/target/soc/$TARGET_CODENAME/patches" ]] \
         && bash "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/target/$TARGET_CODENAME/patches"
 
     echo -e "\n- Applying ROM mods..."

@@ -23,8 +23,7 @@ set -e
 # [
 GET_LATEST_FIRMWARE()
 {
-    curl -s --retry 5 --retry-delay 5 "https://fota-cloud-dn.ospserver.net/firmware/$REGION/$MODEL/version.xml" \
-        | grep latest | sed 's/^[^>]*>//' | sed 's/<.*//'
+    samloader -m "$MODEL" -r "$REGION" checkupdate
 }
 
 DOWNLOAD_FIRMWARE()
@@ -33,22 +32,47 @@ DOWNLOAD_FIRMWARE()
     PDR="$(pwd)"
 
     cd "$ODIN_DIR"
-    { samloader -m "$MODEL" -r "$REGION" -i "$IMEI" download -O "$ODIN_DIR/${MODEL}_${REGION}" > /dev/null; } 2>&1 \
-        && touch "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" \
+
+    if [ ! -f "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" ]; then
+	mkdir -p "$ODIN_DIR/${MODEL}_${REGION}"
+        { samloader -m "$MODEL" -r "$REGION" -i "$IMEI" download -O "$ODIN_DIR/${MODEL}_${REGION}" > /dev/null; } 2>&1 \
+            && touch "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" \
+            || exit 1
+
+	echo "$(GET_LATEST_FIRMWARE)" > "$ODIN_DIR/${MODEL}_${REGION}/.downloaded"
+    fi
+
+    ZIP_FILE="$(find "$ODIN_DIR/${MODEL}_${REGION}" -type f \( -iname '*.zip' \) | sort -r | head -n1)"
+
+    if [ -z "$ZIP_FILE" ]; then
+        echo "No ZIP file found in $ODIN_DIR/${MODEL}_${REGION}"
+        exit 1
+    fi
+
+    echo "Unpacking $(basename "$ZIP_FILE")"
+
+    unzip -o "$ZIP_FILE" -d "$ODIN_DIR/${MODEL}_${REGION}" \
+        && rm -f "$ZIP_FILE" \
         || exit 1
 
-    ZIP_FILE="$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "*.zip" | sort -r | head -n 1)"
-    echo "Unpacking $(basename "$ZIP_FILE")"
-    unzip -o \"$ZIP_FILE\" -d \"$ODIN_DIR/${MODEL}_${REGION}\" && rm -rf \"$ZIP_FILE\" || exit 1
-
-    [ -f "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" ] && {
-        echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "AP*" -exec basename {} \; | cut -d "_" -f 2)/"
-        echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CSC*" -exec basename {} \; | cut -d "_" -f 3)/"
-        echo -n "$(find "$ODIN_DIR/${MODEL}_${REGION}" -name "CP*" -exec basename {} \; | cut -d "_" -f 2)"
-    } >> "$ODIN_DIR/${MODEL}_${REGION}/.downloaded"
+    if find "$ODIN_DIR/${MODEL}_${REGION}" -type f -name "AP*" | grep -q .; then
+        rm -f "$ZIP_FILE"
 
     echo ""
     cd "$PDR"
+}
+
+RETRY_DOWNLOAD()
+{
+    DOWNLOAD_FIRMWARE || return 1
+
+    if find "$DIR" -type f -iname "*.zip" | grep -q .; then
+        return 1
+    fi
+
+    if ! find "$DIR" -type f -name "AP*" | grep -q .; then
+        return 1
+    fi
 }
 
 FIRMWARES=( "$SOURCE_FIRMWARE" )
@@ -100,16 +124,23 @@ do
     REGION=$(echo -n "$i" | cut -d "/" -f 2)
     IMEI=$(echo -n "$i" | cut -d "/" -f 3)
 
-    if [ -f "$ODIN_DIR/${MODEL}_${REGION}/.downloaded" ]; then
-        [ -z "$(GET_LATEST_FIRMWARE)" ] && continue
-        if [[ "$(GET_LATEST_FIRMWARE)" != "$(cat "$ODIN_DIR/${MODEL}_${REGION}/.downloaded")" ]]; then
+    DIR="$ODIN_DIR/${MODEL}_${REGION}"
+
+    if [ -f "$DIR/.downloaded" ] && has_ap; then
+        current="$(cat "$DIR/.downloaded")"
+        latest="$(GET_LATEST_FIRMWARE)"
+
+        [ -z "$latest" ] && continue
+
+        if [[ "$latest" != "$current" ]]; then
             if $FORCE; then
                 echo "- Updating $MODEL firmware with $REGION CSC..."
-                rm -rf "$ODIN_DIR/${MODEL}_${REGION}" && DOWNLOAD_FIRMWARE
+                RETRY_DOWNLOAD || continue
+                echo "$latest" > "$DIR/.downloaded"
             else
-                echo    "- $MODEL firmware with $REGION CSC already downloaded"
-                echo    "  A newer version of this device's firmware is available."
-                echo -e "  To download, clean your Odin firmwares directory or run this cmd with \"--force\"\n"
+                echo "- $MODEL firmware with $REGION CSC already downloaded"
+                echo "  A newer version of this device's firmware is available."
+                echo -e "  To download, run with \"--force\"\n"
                 continue
             fi
         else
@@ -118,7 +149,8 @@ do
         fi
     else
         echo "- Downloading $MODEL firmware with $REGION CSC..."
-        rm -rf "$ODIN_DIR/${MODEL}_${REGION}" && DOWNLOAD_FIRMWARE
+        RETRY_DOWNLOAD || continue
+        echo "$(GET_LATEST_FIRMWARE)" > "$DIR/.downloaded"
     fi
 done
 
