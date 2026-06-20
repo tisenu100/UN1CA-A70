@@ -11,7 +11,6 @@
     <local name="SHOOTING_MODE_NIGHT" back="NIGHT" enable="true" more="true" order="7" info="2" />
     <local name="SHOOTING_MODE_FOOD" back="FOOD" enable="true" more="true" order="8" />
     <local name="SHOOTING_MODE_PANORAMA" back="PANORAMA" enable="true" more="true" order="6" preview-size="1920x1080" capture-size="3264x1836" />
-    <local name="SHOOTING_MODE_MACRO" back="MACRO" enable="true" more="true" order="10" />
     <local name="SHOOTING_MODE_SUPER_SLOW_MOTION" back="SUPER_SLOW_MOTION" enable="true" more="true" order="8" preview-size="1280x720" capture-size="1280x720" info="3" />
     <local name="SHOOTING_MODE_SLOW_MOTION" back="SLOW_MOTION" enable="true" more="true" order="9" preview-size="1280x720" capture-size="1280x720" />
     <local name="SHOOTING_MODE_HYPER_LAPSE" back="HYPER_LAPSE" enable="true" more="true" order="10" preview-size="1920x1080" capture-size="1920x1080" info="4" />
@@ -36,11 +35,6 @@
     <local name="BACK_WIDE_CAMERA_RESOLUTION_1BY1_LARGE" value="2448x2448" />
     <local name="BACK_WIDE_CAMERA_RESOLUTION_FULL_RATIO" value="3264x1468" />
 
-    
-    <local name="BACK_MACRO_CAMERA_RESOLUTION_4BY3" value="2576x1932" />
-    <local name="BACK_MACRO_CAMERA_RESOLUTION_16BY9" value="2560x1440" />
-    <local name="BACK_MACRO_CAMERA_RESOLUTION_1BY1" value="1920x1920" />
-    <local name="BACK_MACRO_CAMERA_RESOLUTION_FULL_RATIO" value="2560x1184" />
 
     
     <local name="FRONT_CAMERA_PICTURE_DEFAULT_RESOLUTION" value="4032x3024" />
