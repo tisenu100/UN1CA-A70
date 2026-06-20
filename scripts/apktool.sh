@@ -152,8 +152,6 @@ DO_RECOMPILE()
 
     echo "Recompiling $IN_DIR"
 
-    mkdir -p "$APKTOOL_DIR$IN_DIR/build/apk"
-    cp -a --preserve=all "$APKTOOL_DIR$IN_DIR/original/META-INF" "$APKTOOL_DIR$IN_DIR/build/apk/META-INF"
     apktool b --frame-path "$FRAMEWORK_DIR" "$APKTOOL_DIR$IN_DIR"
 
     if [[ "$APK_PATH" == *".apk" ]]; then
