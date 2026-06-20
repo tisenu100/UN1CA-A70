@@ -1,19 +1,21 @@
-From c1262263f0650029e37647becbbda1e7a211f736 Mon Sep 17 00:00:00 2001
-From: BlackMesa123 <giangrecosalvo9@gmail.com>
-Date: Mon Sep 29 22:18:32 2025 +0300
+From 1f8b5476815d00bc87bdc38072139c99e341e1b1 Mon Sep 17 00:00:00 2001
+From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
+Date: Sat, 20 Jun 2026 08:03:16 +0300
 Subject: [PATCH] Knox Patch
 
 ---
+ .../server/knox/dar/DarManagerService.smali   | 306 +-----------------
+ .../AttestParameterSpec$Builder.smali         |   2 +
+ 2 files changed, 6 insertions(+), 302 deletions(-)
+
 diff --git a/smali/com/android/server/knox/dar/DarManagerService.smali b/smali/com/android/server/knox/dar/DarManagerService.smali
-index eed51bdc..5024f1b0 100644
+index b221e03e..43e1b4ba 100644
 --- a/smali/com/android/server/knox/dar/DarManagerService.smali
 +++ b/smali/com/android/server/knox/dar/DarManagerService.smali
-@@ -384,59 +384,11 @@
- .end method
- 
+@@ -462,60 +462,7 @@
  .method public final checkDeviceIntegrity([Ljava/security/cert/Certificate;)Z
--    .locals 3
--
+     .locals 3
+ 
 -    const/4 v0, 0x0
 -
 -    aget-object p1, p1, v0
@@ -41,6 +43,11 @@ index eed51bdc..5024f1b0 100644
 -
 -    return v1
 -
+-    :catch_0
+-    move-exception p0
+-
+-    goto :goto_0
+-
 -    :cond_0
 -    invoke-virtual {p0}, Lcom/android/server/knox/dar/DarManagerService;->isEmTokenAllowed()Z
 -
@@ -58,20 +65,16 @@ index eed51bdc..5024f1b0 100644
 -
 -    return v1
 -
--    :catch_0
--    move-exception p0
-+    .locals 0
- 
--    invoke-virtual {p0}, Ljava/security/cert/CertificateParsingException;->printStackTrace()V
-+    const/4 p0, 0x1
- 
 -    :cond_1
 -    return v0
-+    return p0
- .end method
+-
+-    :goto_0
+-    invoke-virtual {p0}, Ljava/security/cert/CertificateParsingException;->printStackTrace()V
++    const/4 v0, 0x1
  
- .method public final checkSystemPermission()V
-@@ -1267,259 +1219,11 @@
+     return v0
+ .end method
+@@ -1368,256 +1315,11 @@
  .end method
  
  .method public final isDeviceRootKeyInstalled()Z
@@ -280,12 +283,12 @@ index eed51bdc..5024f1b0 100644
 -    :catchall_1
 -    move-exception v0
 -
--    goto :goto_9
+-    goto :goto_8
 -
 -    :catch_1
 -    move-exception v0
 -
--    goto :goto_7
+-    goto :goto_6
 -
 -    :cond_5
 -    invoke-virtual {v0, v1}, Lcom/samsung/android/service/DeviceRootKeyService/DeviceRootKeyServiceManager;->isExistDeviceRootKey(I)Z
@@ -298,56 +301,52 @@ index eed51bdc..5024f1b0 100644
 -    :goto_5
 -    iget-object p0, p0, Lcom/android/server/knox/dar/DarManagerService;->mInjector:Lcom/android/server/knox/dar/DarManagerService$Injector;
 -
--    :goto_6
 -    invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
 -
 -    invoke-static {v4, v5}, Landroid/os/Binder;->restoreCallingIdentity(J)V
 -
--    goto :goto_8
+-    goto :goto_7
 -
--    :goto_7
+-    :goto_6
 -    :try_start_3
 -    invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
 -    :try_end_3
 -    .catchall {:try_start_3 .. :try_end_3} :catchall_1
 -
--    iget-object p0, p0, Lcom/android/server/knox/dar/DarManagerService;->mInjector:Lcom/android/server/knox/dar/DarManagerService$Injector;
+-    goto :goto_5
 -
--    goto :goto_6
--
--    :goto_8
+-    :goto_7
 -    invoke-static {v3}, Lcom/android/server/knox/dar/SecureUtil;->record(Z)V
 -
 -    return v3
 -
--    :goto_9
+-    :goto_8
 -    iget-object p0, p0, Lcom/android/server/knox/dar/DarManagerService;->mInjector:Lcom/android/server/knox/dar/DarManagerService$Injector;
 -
 -    invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
-+    .locals 0
++    .locals 1
  
 -    invoke-static {v4, v5}, Landroid/os/Binder;->restoreCallingIdentity(J)V
-+    const/4 p0, 0x1
++    const/4 v0, 0x0
  
 -    throw v0
-+    return p0
++    return v0
  .end method
  
  .method public final isEmTokenAllowed()Z
-diff --git a/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec.smali b/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec.smali
-index e15c5c01..2c3951c0 100644
---- a/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec.smali
-+++ b/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec.smali
-@@ -53,6 +53,8 @@
+diff --git a/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali b/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali
+index 0f7e4dc4..a42816bb 100644
+--- a/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali
++++ b/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali
+@@ -131,6 +131,8 @@
      :goto_1
-     iput-object p1, p0, Lcom/samsung/android/security/keystore/AttestParameterSpec;->mChallenge:[B
+     iput-object p0, v0, Lcom/samsung/android/security/keystore/AttestParameterSpec;->mChallenge:[B
  
-+    const/4 p2, 0x1
++    const/4 v1, 0x1
 +
-     iput-boolean p2, p0, Lcom/samsung/android/security/keystore/AttestParameterSpec;->mVerifiableIntegrity:Z
+     iput-boolean v1, v0, Lcom/samsung/android/security/keystore/AttestParameterSpec;->mVerifiableIntegrity:Z
  
-     iput-boolean p3, p0, Lcom/samsung/android/security/keystore/AttestParameterSpec;->mSAKUidRequired:Z
-
+     const/4 p0, 0x0
 -- 
-2.46.0
+2.43.0
 
