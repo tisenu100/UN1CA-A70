@@ -99,7 +99,7 @@ DO_DECOMPILE()
     fi
 
     echo "Decompiling $OUT_DIR"
-    apktool -q d --no-debug-info --no-res $FORCE -o "$APKTOOL_DIR$OUT_DIR" -p "$FRAMEWORK_DIR" -s "$APK_PATH"
+    apktool d --quiet --no-debug-info --no-res $FORCE --output "$APKTOOL_DIR$OUT_DIR" --frame-path "$FRAMEWORK_DIR" "$APK_PATH"
 }
 
 DO_RECOMPILE()
@@ -154,7 +154,7 @@ DO_RECOMPILE()
 
     mkdir -p "$APKTOOL_DIR$IN_DIR/build/apk"
     cp -a --preserve=all "$APKTOOL_DIR$IN_DIR/original/META-INF" "$APKTOOL_DIR$IN_DIR/build/apk/META-INF"
-    apktool -q b -p "$FRAMEWORK_DIR" -srp "$APKTOOL_DIR$IN_DIR"
+    apktool b --frame-path "$FRAMEWORK_DIR" "$APKTOOL_DIR$IN_DIR"
 
     if [[ "$APK_PATH" == *".apk" ]]; then
         echo "Signing $IN_DIR"
@@ -220,7 +220,7 @@ shift
 FORCE=""
 
 if [[ "$1" == "-f" ]]|| [[ "$1" == "--force" ]]; then
-    FORCE="-f"
+    FORCE="--force"
     shift
 fi
 
