@@ -96,7 +96,7 @@ system/priv-app/AuthFramework
 system/priv-app/AvatarEmojiSticker
 system/priv-app/BCService
 system/priv-app/DeviceKeystring
-system/priv-app/DiagMonAgent95
+system/priv-app/DiagMonAgent97
 system/priv-app/DigitalKey
 system/priv-app/FBInstaller_NS
 system/priv-app/FBServices
@@ -108,7 +108,7 @@ system/priv-app/OneDrive_Samsung_v3
 system/priv-app/PaymentFramework
 system/priv-app/SEMFactoryApp
 system/priv-app/OMCAgent5
-system/priv-app/SOAgent76
+system/priv-app/SOAgent77
 system/priv-app/SamsungCarKeyFw
 system/priv-app/SamsungPass
 system/priv-app/SmartEpdgTestApp
@@ -120,10 +120,13 @@ SYSTEM_DEBLOAT+="
 system/etc/permissions/privapp-permissions-com.samsung.android.app.esimkeystring.xml
 system/etc/permissions/privapp-permissions-com.samsung.euicc.mep.xml
 system/etc/permissions/privapp-permissions-com.samsung.euicc.xml
+system/etc/permissions/privapp-permissions-google-euicc.xml
+system/etc/default-permissions/default-permissions-com.google.android.euicc.xml
 system/etc/sysconfig/preinstalled-packages-com.samsung.android.app.esimkeystring.xml
 system/etc/sysconfig/preinstalled-packages-com.samsung.euicc.xml
 system/priv-app/EsimKeyString
 system/priv-app/EuiccService
+system/priv-app/EuiccGoogle
 "
 
 # KSMBD (Storage Share)
