@@ -1,32 +1,142 @@
-From 3b53424f6042e82a6ac2573764c38c12c6ea8908 Mon Sep 17 00:00:00 2001
-From: tisenu100 <tisenu100@github.com>
-Date: Mon Oct 6 06:22:30 2025 +0300
+From 6b1967ecc929f40e6d8ef418160852cf9fbb6328 Mon Sep 17 00:00:00 2001
+From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
+Date: Sat, 20 Jun 2026 13:32:57 +0300
 Subject: [PATCH] Remove Brightness Threshold
 
 ---
+ .../hardware/display/RefreshRateConfig.smali  | 85 +++++++------------
+ 1 file changed, 33 insertions(+), 52 deletions(-)
+
 diff --git a/smali_classes6/com/samsung/android/hardware/display/RefreshRateConfig.smali b/smali_classes6/com/samsung/android/hardware/display/RefreshRateConfig.smali
-index f5c75017..dfc0b50d 100644
+index f3b7067b..12d153c8 100644
 --- a/smali_classes6/com/samsung/android/hardware/display/RefreshRateConfig.smali
 +++ b/smali_classes6/com/samsung/android/hardware/display/RefreshRateConfig.smali
-@@ -386,7 +386,7 @@
+@@ -128,7 +128,7 @@
+ .end method
  
-     invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ .method public static blacklist dumpProductFeature(Ljava/io/PrintWriter;Ljava/lang/String;Z)V
+-    .locals 3
++    .locals 2
  
--    const-string v0, "SEAMLESS_BRT: 89,91"
+     new-instance v0, Ljava/lang/StringBuilder;
+ 
+@@ -219,86 +219,71 @@
+ 
+     if-eqz p2, :cond_2
+ 
+-    const-string v2, "60,120"
++    const-string p2, "60,120"
+ 
+     goto :goto_1
+ 
+     :cond_2
+-    move-object v2, v1
++    move-object p2, v1
+ 
+     :goto_1
+-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    invoke-virtual {v0, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+ 
+-    move-result-object v0
+-
+-    invoke-virtual {p0, v0}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
+-
+-    new-instance v0, Ljava/lang/StringBuilder;
++    move-result-object p2
+ 
+-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
++    invoke-virtual {p0, p2}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
+ 
+-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    new-instance p2, Ljava/lang/StringBuilder;
+ 
+-    const-string v2, "HFR_SUPPORTED_REFRESH_RATE_NS: "
++    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+ 
+-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    const-string v0, "HFR_SUPPORTED_REFRESH_RATE_NS: "
+ 
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    move-result-object v0
++    invoke-virtual {p2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    invoke-virtual {p0, v0}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
++    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+ 
+-    new-instance v0, Ljava/lang/StringBuilder;
++    move-result-object p2
+ 
+-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
++    invoke-virtual {p0, p2}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
+ 
+-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    new-instance p2, Ljava/lang/StringBuilder;
+ 
+-    const-string v2, "SEAMLESS_BRT: "
++    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+ 
+-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    if-eqz p2, :cond_3
 +    const-string v0, "SEAMLESS_BRT: "
  
-     invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-    const-string v2, "89,91"
++    invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
  
-@@ -441,7 +441,7 @@
+-    goto :goto_2
++    invoke-virtual {p2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
  
-     invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-    :cond_3
+-    move-object v2, v1
++    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
  
--    const-string v0, "SEAMLESS_LUX: 260,2500"
-+    const-string v0, "SEAMLESS_LUX: "
+-    :goto_2
+-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v0
++    move-result-object p2
  
-     invoke-virtual {p2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-    invoke-virtual {p0, v0}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
++    invoke-virtual {p0, p2}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
  
-@@ -584,7 +584,7 @@
+-    new-instance v0, Ljava/lang/StringBuilder;
++    new-instance p2, Ljava/lang/StringBuilder;
+ 
+-    invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
++    invoke-direct {p2}, Ljava/lang/StringBuilder;-><init>()V
+ 
+-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+     const-string p1, "SEAMLESS_LUX: "
+ 
+-    invoke-virtual {v0, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++    invoke-virtual {p2, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    if-eqz p2, :cond_4
++    invoke-virtual {p2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    const-string v1, "260,2500"
+-
+-    :cond_4
+-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++    invoke-virtual {p2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+ 
+     move-result-object p1
+ 
+@@ -486,7 +471,7 @@
  .end method
  
  .method public static blacklist getMainInstance()Lcom/samsung/android/hardware/display/RefreshRateConfig;
@@ -35,7 +145,7 @@ index f5c75017..dfc0b50d 100644
  
      sget-object v0, Lcom/samsung/android/hardware/display/RefreshRateConfig;->sInstance:Lcom/samsung/android/hardware/display/RefreshRateConfig;
  
-@@ -596,11 +596,9 @@
+@@ -498,18 +483,14 @@
  
      const-string/jumbo v2, "persist.dm.passive.ambient_brightness"
  
@@ -49,5 +159,13 @@ index f5c75017..dfc0b50d 100644
  
      const-string v1, "2"
  
+     const-string v2, "60,120"
+ 
+-    const-string v3, ""
+-
+     invoke-static {v1, v2, v3, v0}, Lcom/samsung/android/hardware/display/RefreshRateConfig;->createRefreshRateConfig(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/samsung/android/hardware/display/RefreshRateConfig$BrightnessThreshold;)Lcom/samsung/android/hardware/display/RefreshRateConfig;
+ 
+     move-result-object v0
 -- 
-2.48.1
+2.43.0
+
