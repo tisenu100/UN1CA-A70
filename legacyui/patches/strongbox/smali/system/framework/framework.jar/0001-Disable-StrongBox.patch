@@ -1,25 +1,77 @@
-From 9f3dd7cb8a805e5e3e35b19cb6f17792d7561cf7 Mon Sep 17 00:00:00 2001
-From: BlackMesa123 <giangrecosalvo9@gmail.com>
-Date: Fri Sep 12 12:25:47 2025 +0300
+From 0845f59a05a7e595f8422237e6b9c71daab50d81 Mon Sep 17 00:00:00 2001
+From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
+Date: Sat, 20 Jun 2026 08:35:05 +0300
 Subject: [PATCH] Disable StrongBox
 
 ---
+ .../security/keystore/KeyGenParameterSpec$Builder.smali   | 8 ++++----
+ .../android/security/keystore/KeyGenParameterSpec.smali   | 2 +-
+ .../security/keystore/ParcelableKeyGenParameterSpec.smali | 6 +-----
+ 3 files changed, 6 insertions(+), 10 deletions(-)
 
 diff --git a/smali_classes3/android/security/keystore/KeyGenParameterSpec$Builder.smali b/smali_classes3/android/security/keystore/KeyGenParameterSpec$Builder.smali
-index dde3b6b7..d3f92e63 100644
+index b973b7a2..be1e9ce6 100644
 --- a/smali_classes3/android/security/keystore/KeyGenParameterSpec$Builder.smali
 +++ b/smali_classes3/android/security/keystore/KeyGenParameterSpec$Builder.smali
-@@ -819,6 +819,8 @@
+@@ -284,9 +284,7 @@
+ 
+     iput-boolean v0, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mInvalidatedByBiometricEnrollment:Z
+ 
+-    invoke-virtual {p1}, Landroid/security/keystore/KeyGenParameterSpec;->isStrongBoxBacked()Z
+-
+-    move-result v0
++    const/4 v0, 0x0
+ 
+     iput-boolean v0, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mIsStrongBoxBacked:Z
+ 
+@@ -372,6 +370,8 @@
+ 
+     iput-boolean v1, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mInvalidatedByBiometricEnrollment:Z
+ 
++    const/4 v2, 0x0
++
+     iput-boolean v2, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mIsStrongBoxBacked:Z
+ 
+     iput-boolean v2, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mUnlockedDeviceRequired:Z
+@@ -819,7 +819,7 @@
  .method public whitelist setIsStrongBoxBacked(Z)Landroid/security/keystore/KeyGenParameterSpec$Builder;
      .locals 0
  
-+    const/4 p1, 0x0
-+
-     iput-boolean p1, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mIsStrongBoxBacked:Z
+-    iput-boolean p1, p0, Landroid/security/keystore/KeyGenParameterSpec$Builder;->mIsStrongBoxBacked:Z
++    const/4 p0, 0x0
  
      return-object p0
-
-
+ .end method
+diff --git a/smali_classes3/android/security/keystore/KeyGenParameterSpec.smali b/smali_classes3/android/security/keystore/KeyGenParameterSpec.smali
+index bed31d19..b30bab13 100644
+--- a/smali_classes3/android/security/keystore/KeyGenParameterSpec.smali
++++ b/smali_classes3/android/security/keystore/KeyGenParameterSpec.smali
+@@ -792,7 +792,7 @@
+ .method public whitelist isStrongBoxBacked()Z
+     .locals 0
+ 
+-    iget-boolean p0, p0, Landroid/security/keystore/KeyGenParameterSpec;->mIsStrongBoxBacked:Z
++    const/4 p0, 0x0
+ 
+     return p0
+ .end method
+diff --git a/smali_classes3/android/security/keystore/ParcelableKeyGenParameterSpec.smali b/smali_classes3/android/security/keystore/ParcelableKeyGenParameterSpec.smali
+index 38900143..3700c8b3 100644
+--- a/smali_classes3/android/security/keystore/ParcelableKeyGenParameterSpec.smali
++++ b/smali_classes3/android/security/keystore/ParcelableKeyGenParameterSpec.smali
+@@ -715,11 +715,7 @@
+ 
+     invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeBoolean(Z)V
+ 
+-    iget-object p2, p0, Landroid/security/keystore/ParcelableKeyGenParameterSpec;->mSpec:Landroid/security/keystore/KeyGenParameterSpec;
+-
+-    invoke-virtual {p2}, Landroid/security/keystore/KeyGenParameterSpec;->isStrongBoxBacked()Z
+-
+-    move-result p2
++    const/4 p2, 0x0
+ 
+     invoke-virtual {p1, p2}, Landroid/os/Parcel;->writeBoolean(Z)V
+ 
 -- 
-2.46.0
+2.43.0
 
