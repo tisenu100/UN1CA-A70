@@ -185,7 +185,7 @@ FRAMEWORK_DIR="$APKTOOL_DIR/bin/fw"
 if [ ! -d "$FRAMEWORK_DIR" ]; then
     if [ -f "$WORK_DIR/system/system/framework/framework-res.apk" ]; then
         echo "Set up apktool env"
-        apktool -q if -p "$FRAMEWORK_DIR" "$WORK_DIR/system/system/framework/framework-res.apk"
+        apktool if --quiet --frame-path "$FRAMEWORK_DIR" "$WORK_DIR/system/system/framework/framework-res.apk"
     else
         echo "Please set up your work_dir first."
         exit 1
