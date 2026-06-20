@@ -161,7 +161,7 @@ IMG2SDAT_EXEC=(
 )
 CHECK_TOOLS "${IMG2SDAT_EXEC[@]}" && IMG2SDAT=false
 SAMLOADER_EXEC=(
-    "../venv/bin/samloader"
+    "samloader" "../venv/bin/samloader"
 )
 CHECK_TOOLS "${SAMLOADER_EXEC[@]}" && SAMLOADER=false
 SIGNAPK_EXEC=(

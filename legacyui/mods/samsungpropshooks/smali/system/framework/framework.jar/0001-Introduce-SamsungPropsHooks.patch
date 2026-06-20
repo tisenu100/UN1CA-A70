@@ -1,20 +1,20 @@
-From 98575f870395e86c44a7dc7fddd51e07a2a72212 Mon Sep 17 00:00:00 2001
+From cb8b64aa80dc7e9c35279233c3a1936fded74945 Mon Sep 17 00:00:00 2001
 From: Salvo Giangreco <giangrecosalvo9@gmail.com>
-Date: Thu Oct 2 13:28:10 2025 +0300
+Date: Sat, 20 Jun 2026 16:35:04 +0300
 Subject: [PATCH] Introduce SamsungPropsHooks
 
 ---
- smali/android/app/Instrumentation.smali       |   4 +
- .../android/os/SystemProperties.smali         |  14 +
+ smali/android/app/Instrumentation.smali       |  4 +++
+ .../android/os/SystemProperties.smali         | 18 +++++++++++--
  .../io/mesalabs/unica/SamsungPropsHooks.smali | 494 ++++++++++++++++++
- 3 files changed, 512 insertions(+)
+ 3 files changed, 514 insertions(+), 2 deletions(-)
  create mode 100644 smali_classes6/io/mesalabs/unica/SamsungPropsHooks.smali
 
 diff --git a/smali/android/app/Instrumentation.smali b/smali/android/app/Instrumentation.smali
-index 82c86f26..7d00408e 100644
+index 25f0e3c0..76d46dd6 100644
 --- a/smali/android/app/Instrumentation.smali
 +++ b/smali/android/app/Instrumentation.smali
-@@ -746,6 +746,8 @@
+@@ -783,6 +783,8 @@
  
      invoke-virtual {p0, p1}, Landroid/app/Application;->attach(Landroid/content/Context;)V
  
@@ -23,7 +23,7 @@ index 82c86f26..7d00408e 100644
      return-object p0
  .end method
  
-@@ -4336,6 +4338,8 @@
+@@ -4381,6 +4383,8 @@
  
      invoke-virtual {p0, p3}, Landroid/app/Application;->attach(Landroid/content/Context;)V
  
