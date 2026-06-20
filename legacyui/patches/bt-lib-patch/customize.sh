@@ -17,4 +17,14 @@ fi
 
 #https://github.com/3arthur6/BluetoothLibraryPatcher/blob/master/hexpatch.sh#L12
 HEX_PATCH "$WORK_DIR/system/system/lib64/libbluetooth_jni.so" \
-    "00122a0140395f01086b00020054" "00122a0140395f01086bde030014"
+    "97753948050037360080" "9775392a000014360080"
+HEX_PATCH "$WORK_DIR/system/system/lib64/libbluetooth_jni.so" \
+    "97773948050037360080" "9777392a000014360080"
+HEX_PATCH "$WORK_DIR/system/system/lib64/libbluetooth_jni.so" \
+    "3a009048050037330080" "3a00902a000014330080"
+HEX_PATCH "$WORK_DIR/system/system/lib64/libbluetooth_jni.so" \
+    "f6713948050037330080" "f671392a000014330080"
+HEX_PATCH "$WORK_DIR/system/system/lib64/libbluetooth_jni.so" \
+    "f6733948050037330080" "f673392a000014330080"
+HEX_PATCH "$WORK_DIR/system/system/lib64/libbluetooth_jni.so" \
+    "76743948050037330080" "7674392a000014330080"
