@@ -66,13 +66,6 @@ case "$1" in
     "prebuilts/samsung/r9qxxx")
         FIRMWARE="SM-G990B/SER/353718688287150"
         ;;
-    "prebuilts/samsung/a17xxx")
-        FIRMWARE="SM-A176B/EUX/350037990390427"
-        ;;
-    "prebuilts/samsung/a70q")
-        echo "Quasi folder. Can't do that!"
-        exit 1
-        ;;
     *)
         echo "Firmware not set for path $1"
         exit 1
