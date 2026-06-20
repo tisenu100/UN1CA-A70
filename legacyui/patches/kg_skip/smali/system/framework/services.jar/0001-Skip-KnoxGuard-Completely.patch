@@ -1,24 +1,61 @@
-From a3b0aa6b93b471de16c8c67dc97e7d6890e98f38 Mon Sep 17 00:00:00 2001
-From: tisenu100 <tisenu100@github.com>
-Date: Mon Sep 29 22:15:10 2025 +0300
+From a2e9c918a99b18e39b51dad45e674535f0e991d3 Mon Sep 17 00:00:00 2001
+From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
+Date: Sat, 20 Jun 2026 11:05:44 +0300
 Subject: [PATCH] Skip KnoxGuard Completely
 
 ---
+ smali/com/android/server/SystemServer.smali   | 38 -------------------
+ 1 file changed, 0 insertions(+), 38 deletions(-)
+
 diff --git a/smali/com/android/server/SystemServer.smali b/smali/com/android/server/SystemServer.smali
-index 1fdd682a..5128a685 100644
+index 26de81c7..6ecb5c99 100644
 --- a/smali/com/android/server/SystemServer.smali
 +++ b/smali/com/android/server/SystemServer.smali
-@@ -9837,9 +9837,7 @@
+@@ -10072,44 +10072,6 @@
  
      invoke-virtual {v2}, Landroid/util/TimingsTraceLog;->traceEnd()V
  
 -    invoke-static {}, Landroid/os/FactoryTest;->isFactoryBinary()Z
 -
 -    move-result v0
-+    const/4 v0, 0x1
+-
+-    if-nez v0, :cond_3a
+-
+-    const-string/jumbo v0, "StartKnoxGuard"
+-
+-    invoke-virtual {v2, v0}, Lcom/android/server/utils/TimingsTraceAndSlog;->traceBegin(Ljava/lang/String;)V
+-
+-    :try_start_5a
+-    const-string/jumbo v0, "knoxguard_service"
+-
+-    new-instance v3, Lcom/samsung/android/knoxguard/service/KnoxGuardSeService;
+-
+-    invoke-direct {v3, v6}, Lcom/samsung/android/knoxguard/service/KnoxGuardSeService;-><init>(Landroid/content/Context;)V
+-
+-    invoke-static {v0, v3}, Landroid/os/ServiceManager;->addService(Ljava/lang/String;Landroid/os/IBinder;)V
+-    :try_end_5a
+-    .catchall {:try_start_5a .. :try_end_5a} :catchall_33
+-
+-    goto/16 :goto_59
+-
+-    :catchall_33
+-    move-exception v0
+-
+-    const-string/jumbo v3, "SystemServer"
+-
+-    const-string v8, "Failed to add KnoxGuardService."
+-
+-    invoke-static {v3, v8}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    invoke-virtual {v0}, Ljava/lang/Throwable;->printStackTrace()V
+-
+-    :goto_59
+-    invoke-virtual {v2}, Landroid/util/TimingsTraceLog;->traceEnd()V
+-
+-    :cond_3a
+     const-string/jumbo v0, "StartConnectivityService"
  
-     if-nez v0, :cond_3b
- 
-
+     invoke-virtual {v2, v0}, Lcom/android/server/utils/TimingsTraceAndSlog;->traceBegin(Ljava/lang/String;)V
 -- 
-2.48.1
+2.43.0
+
