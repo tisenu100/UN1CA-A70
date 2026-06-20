@@ -51,8 +51,9 @@ rm -rf "$APKTOOL_DIR/$f"
 done
 
 echo "Adding Donor Components"
+echo "Note: They're inherited from the 32-bit stack base. THIS IS NOT CLEAN"
 
-ADD_TO_WORK_DIR "a17xxx" "system" "system/lib64/libandroid_servers.so" 0 0 644 "u:object_r:system_lib_file:s0"
-ADD_TO_WORK_DIR "a17xxx" "system" "system/lib64/libmdf.so" 0 0 644 "u:object_r:system_lib_file:s0"
-ADD_TO_WORK_DIR "a17xxx" "system" "system/priv-app/KnoxCore/KnoxCore.apk" 0 0 644 "u:object_r:system_file:s0"
-ADD_TO_WORK_DIR "a17xxx" "system" "system/priv-app/KnoxZtFramework/KnoxZtFramework.apk" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "$SOURCE_EXTRA_FIRMWARES" "system" "system/lib64/libandroid_servers.so" 0 0 644 "u:object_r:system_lib_file:s0"
+ADD_TO_WORK_DIR "$SOURCE_EXTRA_FIRMWARES" "system" "system/lib64/libmdf.so" 0 0 644 "u:object_r:system_lib_file:s0"
+ADD_TO_WORK_DIR "$SOURCE_EXTRA_FIRMWARES" "system" "system/priv-app/KnoxCore/KnoxCore.apk" 0 0 644 "u:object_r:system_file:s0"
+ADD_TO_WORK_DIR "$SOURCE_EXTRA_FIRMWARES" "system" "system/priv-app/KnoxZtFramework/KnoxZtFramework.apk" 0 0 644 "u:object_r:system_file:s0"
