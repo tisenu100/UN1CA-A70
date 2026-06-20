@@ -57,6 +57,7 @@ DOWNLOAD_FIRMWARE()
 
     if find "$ODIN_DIR/${MODEL}_${REGION}" -type f -name "AP*" | grep -q .; then
         rm -f "$ZIP_FILE"
+    fi
 
     echo ""
     cd "$PDR"

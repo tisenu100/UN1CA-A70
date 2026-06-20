@@ -3,3 +3,8 @@
 /system/system_ext u:object_r:system_file:s0
 /system/system_ext/apex u:object_r:system_file:s0
 /system/system_ext/apex/com\.android\.vndk\.v30\.apex u:object_r:system_file:s0
+/system/system_ext/lib u:object_r:system_lib_file:s0
+/system/system_ext/lib/vendor\.qti\.hardware\.display\.config-V11-ndk\.so u:object_r:system_lib_file:s0
+/system/system_ext/lib/libQSEEComAPI_system\.so u:object_r:system_lib_file:s0
+/system/system_ext/lib/vendor\.qti\.hardware\.qseecom-V1-ndk\.so u:object_r:system_lib_file:s0
+/system/system_ext/lib/vendor\.qti\.hardware\.qseecom@1\.0\.so u:object_r:system_lib_file:s0
