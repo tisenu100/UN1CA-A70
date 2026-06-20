@@ -1,10 +1,15 @@
-commit 085b5f4f902c5dacc7b4b5b7982bd2d6a778fa49
-From: tisenu100 <tisenu100@github.com>
-Date:   Sat Feb 7 13:05:58 2026 +0200
+From f7f183741ac216c9be77055112cb5becd18c7b62 Mon Sep 17 00:00:00 2001
+From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
+Date: Sat, 20 Jun 2026 17:06:47 +0300
 Subject: [PATCH] Remove Knox Services
 
+---
+ .../samsung/android/knox/hdm/HdmManager.smali | 464 ++----------------
+ .../integrity/EnhancedAttestationPolicy.smali |   2 +-
+ 2 files changed, 55 insertions(+), 411 deletions(-)
+
 diff --git a/smali/com/samsung/android/knox/hdm/HdmManager.smali b/smali/com/samsung/android/knox/hdm/HdmManager.smali
-index 6d9e478..dc87db9 100644
+index 2ab0c45..592e041 100644
 --- a/smali/com/samsung/android/knox/hdm/HdmManager.smali
 +++ b/smali/com/samsung/android/knox/hdm/HdmManager.smali
 @@ -35,7 +35,7 @@
@@ -681,10 +686,10 @@ index 6d9e478..dc87db9 100644
      const/4 p0, -0x1
  
 diff --git a/smali/com/samsung/android/knox/integrity/EnhancedAttestationPolicy.smali b/smali/com/samsung/android/knox/integrity/EnhancedAttestationPolicy.smali
-index 558fc5a..e6d6d01 100644
+index 5bbbba5..31d3795 100644
 --- a/smali/com/samsung/android/knox/integrity/EnhancedAttestationPolicy.smali
 +++ b/smali/com/samsung/android/knox/integrity/EnhancedAttestationPolicy.smali
-@@ -662,7 +662,7 @@
+@@ -645,7 +645,7 @@
  .method public greylist isMposSupported()Z
      .locals 0
  
@@ -693,3 +698,6 @@ index 558fc5a..e6d6d01 100644
  
      return p0
  .end method
+-- 
+2.43.0
+
