@@ -1,21 +1,23 @@
-From 1f8b5476815d00bc87bdc38072139c99e341e1b1 Mon Sep 17 00:00:00 2001
+From 9f86f2fd13dfbd711e2297af01ecff42af7e4fe9 Mon Sep 17 00:00:00 2001
 From: tisenu100 <103323979+tisenu100@users.noreply.github.com>
-Date: Sat, 20 Jun 2026 08:03:16 +0300
+Date: Tue, 23 Jun 2026 18:37:20 +0300
 Subject: [PATCH] Knox Patch
 
 ---
- .../server/knox/dar/DarManagerService.smali   | 306 +-----------------
- .../AttestParameterSpec$Builder.smali         |   2 +
- 2 files changed, 6 insertions(+), 302 deletions(-)
+ .../server/knox/dar/DarManagerService.smali   | 308 +-----------------
+ .../AttestParameterSpec$Builder.smali         |   6 +-
+ 2 files changed, 10 insertions(+), 304 deletions(-)
 
 diff --git a/smali/com/android/server/knox/dar/DarManagerService.smali b/smali/com/android/server/knox/dar/DarManagerService.smali
-index b221e03e..43e1b4ba 100644
+index b221e03e..5f1aa422 100644
 --- a/smali/com/android/server/knox/dar/DarManagerService.smali
 +++ b/smali/com/android/server/knox/dar/DarManagerService.smali
-@@ -462,60 +462,7 @@
- .method public final checkDeviceIntegrity([Ljava/security/cert/Certificate;)Z
-     .locals 3
+@@ -460,62 +460,9 @@
+ .end method
  
+ .method public final checkDeviceIntegrity([Ljava/security/cert/Certificate;)Z
+-    .locals 3
+-
 -    const/4 v0, 0x0
 -
 -    aget-object p1, p1, v0
@@ -67,7 +69,8 @@ index b221e03e..43e1b4ba 100644
 -
 -    :cond_1
 -    return v0
--
++    .locals 1
+ 
 -    :goto_0
 -    invoke-virtual {p0}, Ljava/security/cert/CertificateParsingException;->printStackTrace()V
 +    const/4 v0, 0x1
@@ -327,7 +330,7 @@ index b221e03e..43e1b4ba 100644
 +    .locals 1
  
 -    invoke-static {v4, v5}, Landroid/os/Binder;->restoreCallingIdentity(J)V
-+    const/4 v0, 0x0
++    const/4 v0, 0x1
  
 -    throw v0
 +    return v0
@@ -335,10 +338,28 @@ index b221e03e..43e1b4ba 100644
  
  .method public final isEmTokenAllowed()Z
 diff --git a/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali b/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali
-index 0f7e4dc4..a42816bb 100644
+index 0f7e4dc4..762438e4 100644
 --- a/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali
 +++ b/smali_classes2/com/samsung/android/security/keystore/AttestParameterSpec$Builder.smali
-@@ -131,6 +131,8 @@
+@@ -17,7 +17,7 @@
+ 
+     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+ 
+-    const/4 v0, 0x0
++    const/4 v0, 0x1
+ 
+     iput-boolean v0, p0, Lcom/samsung/android/security/keystore/AttestParameterSpec$Builder;->mVerifiableIntegrity:Z
+ 
+@@ -91,6 +91,8 @@
+ 
+     new-instance v0, Lcom/samsung/android/security/keystore/AttestParameterSpec;
+ 
++    const/4 v1, 0x1
++
+     iget-boolean v1, p0, Lcom/samsung/android/security/keystore/AttestParameterSpec$Builder;->mVerifiableIntegrity:Z
+ 
+     iget-object v2, p0, Lcom/samsung/android/security/keystore/AttestParameterSpec$Builder;->mSpec:Landroid/security/keystore/KeyGenParameterSpec;
+@@ -131,6 +133,8 @@
      :goto_1
      iput-object p0, v0, Lcom/samsung/android/security/keystore/AttestParameterSpec;->mChallenge:[B
  
